@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+
+// import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Component } from "@shared/Component";
-import GlobalStyle from "@/styles/GlobalStyle";
+import GlobalStyle from "@/components/style/GlobalStyle";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,10 +16,10 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "bank-account",
-  description: "banks account application",
-};
+// export const metadata: Metadata = {
+//   title: "bank-account",
+//   description: "banks account application",
+// };
 
 export default function RootLayout({
   children,

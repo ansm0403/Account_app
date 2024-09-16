@@ -24,7 +24,9 @@
       "@shared/*" : ["src/components/shared/*"],
       "@styles/*" : ["src/styles/*"],
       "@remote/" : ["src/remote/*"],
-    }
+      "@constant/" : ["src/constant/*"] 
+    },
+    
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
