@@ -1,9 +1,10 @@
-
+'use client'
 // import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Component } from "@shared/Component";
 import GlobalStyle from "@/components/style/GlobalStyle";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,6 +22,8 @@ const geistMono = localFont({
 //   description: "banks account application",
 // };
 
+const client = new QueryClient({});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,7 +35,9 @@ export default function RootLayout({
         <Component> 안녕ㅋㅋ </Component>
         <div className="hi">씨바루</div>
         <GlobalStyle />
-        {children}
+        <QueryClientProvider client={client}>
+          {children}
+        </QueryClientProvider>
       </body>
     </html>
   );

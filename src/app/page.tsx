@@ -1,9 +1,10 @@
-
+'use client'
+import EventBanner from "@/components/home/EventBanner";
 import styles from "./page.module.css";
 import dynamic from "next/dynamic";
 
 const EventBanners = dynamic(()=> import("@/components/home/EventBanner"), {
-  loading : () => <div>Loading...</div>,
+  ssr : false,
 }) 
 
 export default function Home() {
