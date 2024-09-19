@@ -24,7 +24,8 @@
       "@shared/*" : ["src/components/shared/*"],
       "@styles/*" : ["src/styles/*"],
       "@remote/" : ["src/remote/*"],
-      "@constant/" : ["src/constant/*"] 
+      "@constant/" : ["src/constant/*"],
+      "@model/" : ["src/model/*"]
     },
     
   },
