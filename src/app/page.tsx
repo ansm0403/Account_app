@@ -1,15 +1,17 @@
-'use client'
-import EventBanner from "@/components/home/EventBanner";
-import styles from "./page.module.css";
+
+import Skeleton from "@/components/shared/Skeletion";
 import dynamic from "next/dynamic";
 
-const EventBanners = dynamic(()=> import("@/components/home/EventBanner"), {
+const EventBanner = dynamic(()=> import("@/components/home/EventBanner"), {
   ssr : false,
+  loading : () => (
+    <Skeleton width = "100%" height={100} style ={{borderRadius : 8}} />
+  )
 }) 
 
 export default function Home() {
   return (
-    <div className={styles.page}>
+    <div>
       <EventBanner />
     </div>
   );

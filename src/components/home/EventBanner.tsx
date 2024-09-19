@@ -1,11 +1,11 @@
-import React from 'react'
+'use client'
 import useEventBanner from './hooks/useEventBanner'
 import withSusepnse from '@/hook/withSuspense';
-import Swiper from 'swiper';
-import { SwiperSlide } from 'swiper/vue';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Flex from '../shared/Flex';
 import Text from '../shared/Text';
+import Skeleton from '../shared/Skeletion';
 
 function EventBanner() {
   const { data } = useEventBanner()
@@ -14,13 +14,13 @@ function EventBanner() {
   
   return (
     <div>
-      <Swiper>
+      <Swiper spaceBetween={8}>
         {data?.map((banner)=>{
           return (
           <SwiperSlide key = {banner.id}>
             <Link href = {banner.link}>
               <Flex 
-                style={{backgroundColor : banner.backgroundColor}}
+                style={{backgroundColor : banner.backgroundColor, ...bannerStyle}}
                 justify='space-between'  
               >
                 <Flex direction='column'>
@@ -38,6 +38,11 @@ function EventBanner() {
   )
 }
 
+const bannerStyle = {
+  borderRadius : "8px",
+  padding : "24px"
+}
+
 export default withSusepnse(EventBanner, {
-  fallback : <div>로딩중 ...</div>
+  fallback : <Skeleton width = "100%" height={100} style ={{borderRadius : 8}} />
 })

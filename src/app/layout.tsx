@@ -1,10 +1,7 @@
-'use client'
-// import type { Metadata } from "next";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import { Component } from "@shared/Component";
 import GlobalStyle from "@/components/style/GlobalStyle";
-import { QueryClient, QueryClientProvider } from "react-query";
+import ClientProvider from "@/context/ClientProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,12 +14,11 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-// export const metadata: Metadata = {
-//   title: "bank-account",
-//   description: "banks account application",
-// };
+export const metadata: Metadata = {
+  title: "bank-account",
+  description: "banks account application",
+};
 
-const client = new QueryClient({});
 
 export default function RootLayout({
   children,
@@ -32,12 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Component> 안녕ㅋㅋ </Component>
         <div className="hi">씨바루</div>
         <GlobalStyle />
-        <QueryClientProvider client={client}>
+        <ClientProvider>
           {children}
-        </QueryClientProvider>
+        </ClientProvider>
       </body>
     </html>
   );
