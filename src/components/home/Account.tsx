@@ -25,7 +25,7 @@ export default function Account(){
 
     // 계좌 보유하고 있지 않음.
     // 계좌 개설중일 수도 있음.
-    const accountMakeState = ""
+    const accountMakeState : string = ""
     const title = accountMakeState === "READY" ? "개설중인 계좌가 있습니다." : "계좌개설이 더 쉽고 빨라졌어요." 
     const buttonLabel = accountMakeState === "READY" ? "이어만들기" : "3분만에 가입하기"
 

@@ -1,18 +1,19 @@
+
 import Link from 'next/link'
-import CreditScoreChart from '@shared/CreditScoreChart'
+import CreditScoreChart from '../shared/CreditScoreGraph'
 import Flex from '@shared/Flex'
 import Text from '@shared/Text'
 import Button from '@shared/Button'
 import Spacing from '@shared/Spacing'
-import Skeleton from '@shared/Skeleton'
-import useCredit from '@components/credit/hooks/useCredit'
+import Skeleton from '../shared/Skeletion'
+// import useCredit from '@components/credit/hooks/useCredit'
 
 function CreditScore() {
-  const { data, isLoading } = useCredit()
+  // const { data, isLoading } = useCredit()
 
-  if (isLoading) {
-    return <CreditScoreSkeleton />
-  }
+  // if (isLoading) {
+  //   return <CreditScoreSkeleton />
+  // }
 
   return (
     <div style={{ padding: 24 }}>
@@ -30,7 +31,7 @@ function CreditScore() {
         <CreditScoreChart
           width={80}
           height={80}
-          score={data?.creditScore ?? 0}
+          score={500}
         />
       </Flex>
     </div>

@@ -1,12 +1,11 @@
 'use client'
 import { useRef, useEffect, useState, memo } from 'react'
 import styled from '@emotion/styled'
-import { css } from '@emotion/react'
+// import { css } from '@emotion/react'
 
 import { colors } from '@styles/colorPalette'
 import Text from '@shared/Text'
 import addDelimiter from '@/utils/addDelimiter'
-import { relative } from 'path'
 
 
 const 신용점수_최대값 = 1_000
@@ -62,7 +61,7 @@ function CreditScoreChart({
           strokeDashoffset={dashoffset}
         ></path>
       </svg>
-      <Text style = {{...textStyles, position : relative}} bold={true}  typography="t6">
+      <Text style = {textStyles} bold={true}  typography="t6" position='absolute'>
         {score === 0 ? '???' : addDelimiter(score)}
       </Text>
     </Container>
@@ -78,10 +77,9 @@ const Container = styled.div<{ width: number; height: number }>(
 )
 
 const textStyles = {
-  position: "absolute",
   bottom: "25%",
   transform: "translateX(-50%)",
-  left: "50%"
+  left: "50%",
 }
 
 export default memo(CreditScoreChart)
