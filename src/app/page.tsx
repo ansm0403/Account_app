@@ -1,4 +1,5 @@
 
+import CardList from "@/components/home/CardList";
 import Spacing from "@/components/shared/Spacing";
 import Account from "@components/home/Account";
 import { BannerSkeleton } from "@components/home/EventBanner";
@@ -23,6 +24,7 @@ export default function Home() {
       <Account />
       <Spacing size = {8} backgroundColor="gray100" />
       <CreditScore />
+      <CardList />
     </div>
   );
 }
