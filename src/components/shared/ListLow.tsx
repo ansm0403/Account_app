@@ -1,9 +1,10 @@
 'use client'
-import { SerializedStyles } from '@emotion/react'
+// import { SerializedStyles } from '@emotion/react'
 import Flex from './Flex'
 import Text from './Text'
 import Spacing from './Spacing'
 import Skeleton from './Skeletion'
+import { CSSProperties } from 'react'
 
 interface ListRowProps {
   left?: React.ReactNode
@@ -12,7 +13,7 @@ interface ListRowProps {
   withArrow?: boolean
   onClick?: () => void
   as?: 'div' | 'li'
-  style?: SerializedStyles
+  style?: CSSProperties
 }
 
 function ListRow({
@@ -22,12 +23,11 @@ function ListRow({
   right,
   withArrow,
   onClick,
-  style,
 }: ListRowProps) {
   return (
     <Flex
       as={as}
-      style={[listRowContainerStyles, style]}
+      style={listRowContainerStyles}
       onClick={onClick}
       align="center"
     >
@@ -40,7 +40,7 @@ function ListRow({
 }
 
 const listRowContainerStyles = {
-  padding: "8px 24px"
+  padding : "8px 24px"
 }
 
 const listRowLeftStyles = { 
