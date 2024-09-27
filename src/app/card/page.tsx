@@ -23,14 +23,12 @@ export default function CardListPage(){
         if(hasNextPage === false || isFetching) {
             return
         }
-
         fetchNextPage()
     },[hasNextPage, fetchNextPage, isFetching])
 
     if(data == null) {
         return null
     }
-
     const cards = data?.pages.map(({items}) => items).flat();
 
     return (
