@@ -1,13 +1,31 @@
 'use client'
-import React, { ReactNode } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import React, { ReactNode, useState } from 'react'
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 
-const client = new QueryClient({});
+// const client = new QueryClient({});
 
-export default function ClientProvider({children} : {children : ReactNode}) {
+type Props = {
+  children : ReactNode
+  pageProps : any
+}
+
+export default function ClientProvider({children, pageProps : {dehydrateState}} : Props) {
+  
+  const [client] = useState(
+    () => new QueryClient({
+      defaultOptions : {
+        queries : {
+          staleTime : 60*1000,
+        }
+      }
+    })
+    
+  )
   return (
     <QueryClientProvider client={client}>
+      <Hydrate state={dehydrateState}>       
         {children}
+      </Hydrate>
     </QueryClientProvider>
   )
 }

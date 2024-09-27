@@ -39,6 +39,7 @@ const RAW_RUNTIME_STATE =
           ["next", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:14.2.11"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:18.3.1"],\
+          ["react-infinite-scroll-component", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:6.1.0"],\
           ["react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:3.39.3"],\
           ["swiper", "npm:11.1.14"],\
           ["typescript", "patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"]\
@@ -2518,6 +2519,7 @@ const RAW_RUNTIME_STATE =
           ["next", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:14.2.11"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:18.3.1"],\
+          ["react-infinite-scroll-component", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:6.1.0"],\
           ["react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:3.39.3"],\
           ["swiper", "npm:11.1.14"],\
           ["typescript", "patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"]\
@@ -5288,6 +5290,29 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["react-infinite-scroll-component", [\
+      ["npm:6.1.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/react-infinite-scroll-component-npm-6.1.0-fc628f1f18-10c0.zip/node_modules/react-infinite-scroll-component/",\
+        "packageDependencies": [\
+          ["react-infinite-scroll-component", "npm:6.1.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:6.1.0", {\
+        "packageLocation": "./.yarn/__virtual__/react-infinite-scroll-component-virtual-2dc630cd2f/4/AppData/Local/Yarn/Berry/cache/react-infinite-scroll-component-npm-6.1.0-fc628f1f18-10c0.zip/node_modules/react-infinite-scroll-component/",\
+        "packageDependencies": [\
+          ["react-infinite-scroll-component", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:6.1.0"],\
+          ["@types/react", "npm:18.3.5"],\
+          ["react", "npm:18.3.1"],\
+          ["throttle-debounce", "npm:2.3.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["react-is", [\
       ["npm:16.13.1", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/react-is-npm-16.13.1-a9b9382b4f-10c0.zip/node_modules/react-is/",\
@@ -5909,6 +5934,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/text-table-npm-0.2.0-d92a778b59-10c0.zip/node_modules/text-table/",\
         "packageDependencies": [\
           ["text-table", "npm:0.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["throttle-debounce", [\
+      ["npm:2.3.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/throttle-debounce-npm-2.3.0-0e354dff02-10c0.zip/node_modules/throttle-debounce/",\
+        "packageDependencies": [\
+          ["throttle-debounce", "npm:2.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
