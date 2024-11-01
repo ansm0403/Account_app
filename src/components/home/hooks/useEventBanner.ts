@@ -1,14 +1,12 @@
 import { getEventBanner } from "@/remote/banner";
-import { useQuery } from "react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
+
 
 function useEventBanner(){
-    return useQuery(
-        ['event-banner'], 
-        () => getEventBanner({hasAccount : false}),
-        {
-            suspense : true,
-        }
-    )
+    return useSuspenseQuery({
+        queryKey : ['event-banner'], 
+        queryFn : () => getEventBanner({hasAccount : false}),
+    })
 }
 
 export default useEventBanner;

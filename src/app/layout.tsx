@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import GlobalStyle from "@/components/style/GlobalStyle";
 import ClientProvider from "@/context/ClientProvider";
-import { getDehydrateProps } from "./card/page";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,12 +25,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="hi">씨바루</div>
         <GlobalStyle />
-        <ClientProvider pageProps={getDehydrateProps}>
+        <ClientProvider>
           {children}
         </ClientProvider>
       </body>
