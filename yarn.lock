@@ -74,12 +74,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.23.8, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.2":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3":
   version: 7.25.6
   resolution: "@babel/runtime@npm:7.25.6"
   dependencies:
     regenerator-runtime: "npm:^0.14.0"
   checksum: 10c0/d6143adf5aa1ce79ed374e33fdfd74fa975055a80bc6e479672ab1eadc4e4bfd7484444e17dd063a1d180e051f3ec62b357c7a2b817e7657687b47313158c3d2
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.23.8, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.6.2, @babel/runtime@npm:^7.7.2":
+  version: 7.26.0
+  resolution: "@babel/runtime@npm:7.26.0"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/12c01357e0345f89f4f7e8c0e81921f2a3e3e101f06e8eaa18a382b517376520cd2fa8c237726eb094dab25532855df28a7baaf1c26342b52782f6936b07c287
   languageName: node
   linkType: hard
 
@@ -1182,6 +1191,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.59.16":
+  version: 5.59.16
+  resolution: "@tanstack/query-core@npm:5.59.16"
+  checksum: 10c0/487a1ac0df5e02ca4ea5bf3b9ee0010ac7fe0856a36fa7bd10947598d3f0ba356c91aa21b123729b26f2116f05b8b69cd8fb17681c24cdd586de17b6fe021521
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.59.16":
+  version: 5.59.16
+  resolution: "@tanstack/react-query@npm:5.59.16"
+  dependencies:
+    "@tanstack/query-core": "npm:5.59.16"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/82acf170d2d169ad18081e4dc52bdcec3b92bd1b134bb704ab6949937a59fd4d7d4ddb1172dd7fdbd1667a2d2e0ffa118e68bde5f53972649b8e55bd0e87244c
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.12":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -1627,6 +1654,7 @@ __metadata:
     "@emotion/react": "npm:^11.13.3"
     "@emotion/server": "npm:^11.11.0"
     "@emotion/styled": "npm:^11.13.0"
+    "@tanstack/react-query": "npm:^5.59.16"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"

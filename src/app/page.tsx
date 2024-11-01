@@ -1,5 +1,5 @@
 // import CardList from "@/components/home/CardList";
-import { CardListSkeletion } from "@/components/home/CardList";
+import { CardListSkeleton } from "@/components/home/CardList";
 import Spacing from "@/components/shared/Spacing";
 import Account from "@components/home/Account";
 import { CreditScoreSkeleton } from "@components/home/CreditScore";
@@ -20,7 +20,7 @@ const CreditScore = dynamic(()=> import("@components/home/CreditScore"),{
 
 const CardList = dynamic(()=> import("@/components/home/CardList"),{
   ssr : false,
-  loading : () => <CardListSkeletion />
+  loading : () => <CardListSkeleton />
 })
 
 export default function Home() {

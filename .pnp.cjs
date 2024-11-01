@@ -30,6 +30,7 @@ const RAW_RUNTIME_STATE =
           ["@emotion/react", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:11.13.3"],\
           ["@emotion/server", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:11.11.0"],\
           ["@emotion/styled", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:11.13.0"],\
+          ["@tanstack/react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:5.59.16"],\
           ["@types/node", "npm:20.16.5"],\
           ["@types/react", "npm:18.3.5"],\
           ["@types/react-dom", "npm:18.3.0"],\
@@ -128,6 +129,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@babel-runtime-npm-7.25.6-6725f0979a-10c0.zip/node_modules/@babel/runtime/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.25.6"],\
+          ["regenerator-runtime", "npm:0.14.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:7.26.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@babel-runtime-npm-7.26.0-9afa3c4ef6-10c0.zip/node_modules/@babel/runtime/",\
+        "packageDependencies": [\
+          ["@babel/runtime", "npm:7.26.0"],\
           ["regenerator-runtime", "npm:0.14.1"]\
         ],\
         "linkType": "HARD"\
@@ -1920,6 +1929,38 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@tanstack/query-core", [\
+      ["npm:5.59.16", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@tanstack-query-core-npm-5.59.16-038eb67125-10c0.zip/node_modules/@tanstack/query-core/",\
+        "packageDependencies": [\
+          ["@tanstack/query-core", "npm:5.59.16"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tanstack/react-query", [\
+      ["npm:5.59.16", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@tanstack-react-query-npm-5.59.16-39b7f2f1cf-10c0.zip/node_modules/@tanstack/react-query/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query", "npm:5.59.16"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:5.59.16", {\
+        "packageLocation": "./.yarn/__virtual__/@tanstack-react-query-virtual-062d144083/4/AppData/Local/Yarn/Berry/cache/@tanstack-react-query-npm-5.59.16-39b7f2f1cf-10c0.zip/node_modules/@tanstack/react-query/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:5.59.16"],\
+          ["@tanstack/query-core", "npm:5.59.16"],\
+          ["@types/react", "npm:18.3.5"],\
+          ["react", "npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/json-schema", [\
       ["npm:7.0.15", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@types-json-schema-npm-7.0.15-fd16381786-10c0.zip/node_modules/@types/json-schema/",\
@@ -2510,6 +2551,7 @@ const RAW_RUNTIME_STATE =
           ["@emotion/react", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:11.13.3"],\
           ["@emotion/server", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:11.11.0"],\
           ["@emotion/styled", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:11.13.0"],\
+          ["@tanstack/react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:5.59.16"],\
           ["@types/node", "npm:20.16.5"],\
           ["@types/react", "npm:18.3.5"],\
           ["@types/react-dom", "npm:18.3.0"],\
@@ -2570,7 +2612,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/broadcast-channel-npm-3.7.0-81ceba70bb-10c0.zip/node_modules/broadcast-channel/",\
         "packageDependencies": [\
           ["broadcast-channel", "npm:3.7.0"],\
-          ["@babel/runtime", "npm:7.25.6"],\
+          ["@babel/runtime", "npm:7.26.0"],\
           ["detect-node", "npm:2.1.0"],\
           ["js-sha3", "npm:0.8.0"],\
           ["microseconds", "npm:0.2.0"],\
@@ -4727,7 +4769,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/match-sorter-npm-6.3.4-a2cec580f9-10c0.zip/node_modules/match-sorter/",\
         "packageDependencies": [\
           ["match-sorter", "npm:6.3.4"],\
-          ["@babel/runtime", "npm:7.25.6"],\
+          ["@babel/runtime", "npm:7.26.0"],\
           ["remove-accents", "npm:0.5.0"]\
         ],\
         "linkType": "HARD"\
@@ -5334,7 +5376,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/react-query-virtual-cd8cb67dd9/4/AppData/Local/Yarn/Berry/cache/react-query-npm-3.39.3-72b2a93edf-10c0.zip/node_modules/react-query/",\
         "packageDependencies": [\
           ["react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:3.39.3"],\
-          ["@babel/runtime", "npm:7.25.6"],\
+          ["@babel/runtime", "npm:7.26.0"],\
           ["@types/react", "npm:18.3.5"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/react-native", null],\
@@ -6163,7 +6205,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/unload-npm-2.2.0-c40df6b4d0-10c0.zip/node_modules/unload/",\
         "packageDependencies": [\
           ["unload", "npm:2.2.0"],\
-          ["@babel/runtime", "npm:7.25.6"],\
+          ["@babel/runtime", "npm:7.26.0"],\
           ["detect-node", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\

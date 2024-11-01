@@ -1,31 +1,19 @@
 'use client'
-import React, { ReactNode, useState } from 'react'
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 
-// const client = new QueryClient({});
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import React, { ReactNode } from 'react'
 
 type Props = {
   children : ReactNode
-  pageProps : any
 }
 
-export default function ClientProvider({children, pageProps : {dehydrateState}} : Props) {
-  
-  const [client] = useState(
-    () => new QueryClient({
-      defaultOptions : {
-        queries : {
-          staleTime : 60*1000,
-        }
-      }
-    })
+export default function ClientProvider({children} : Props) {
+
+  const client = new QueryClient()
     
-  )
   return (
     <QueryClientProvider client={client}>
-      <Hydrate state={dehydrateState}>       
         {children}
-      </Hydrate>
     </QueryClientProvider>
   )
 }
