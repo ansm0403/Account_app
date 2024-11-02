@@ -4,31 +4,19 @@ import { getCards } from "@/remote/card"
 import CardList from "./CardList";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
-export default function CardListPage(){
-    const {data, hasNextPage = false, fetchNextPage, isFetching} = useInfiniteQuery(
-        ['cards'], 
-        ({pageParam}) => getCards(pageParam), {
-        getNextPageParam : (snapshot) => {
-            return snapshot.lastVisible
-        }
-    } )
-    console.log('data', data);
+export default async function CardListPage(){
 
-    const navigate = useRouter();
+    const client = new QueryClient()
 
-    const loadMore = useCallback(()=>{
-        if(hasNextPage === false || isFetching) {
-            return
-        }
+    client.prefetchInfiniteQuery({
+        queryKey : ['cards'],
+        queryFn : () => getCards(),
+        initialPageParam : undefined,
+    })
 
-        fetchNextPage()
-    },[hasNextPage, fetchNextPage, isFetching])
+    const dehydrateState = dehydrate(client);
 
-    if(data == null) {
-        return null
-    }
-
-    const cards = data?.pages.map(({items}) => items).flat();
+    console.log(dehydrateState.queries);
 
     return (
         <div>
@@ -38,5 +26,4 @@ export default function CardListPage(){
         </div>
     )
 }
-
 

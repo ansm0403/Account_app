@@ -1,5 +1,7 @@
 import { getCard } from "@/remote/card";
-import { HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import DetailCard from "./CardDetail";
+
 
 type Props = {
     params : {id : string}
@@ -10,13 +12,14 @@ export default async function CardDetailPage({params : {id}} : Props){
     const client = new QueryClient();
     
     await client.prefetchQuery({
-       queryKey : ['detail-card'],
+       queryKey : ['detail-card', id],
        queryFn : () => getCard(id),
     })
 
+
     return(
-        <HydrationBoundary state = {client}>
-            <CardDetailPage cardId = {id}/>
+        <HydrationBoundary state = {dehydrate(client)}>
+            <DetailCard cardId={id}/>
         </HydrationBoundary>
     )
 }

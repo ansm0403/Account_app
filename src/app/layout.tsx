@@ -35,6 +35,7 @@ export default function RootLayout({
         <ClientProvider>
           {children}
         </ClientProvider>
+        <div id = 'root-portal' />
       </body>
     </html>
   );
