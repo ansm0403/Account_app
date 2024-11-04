@@ -52,7 +52,7 @@ export default function DetailCard({cardId} : Props) {
                             as ="div" 
                             left = {
                                 <Image 
-                                    src = ""
+                                    src = "/images/check_circle_icon.png"
                                     width = {40} 
                                     height = {40} 
                                     alt = ""

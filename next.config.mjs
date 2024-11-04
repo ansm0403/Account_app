@@ -2,7 +2,8 @@
 const nextConfig = {
     images : {
         domains : [
-            "cdn2.iconfinder.com"
+            "cdn2.iconfinder.com",
+            "lh3.googleusercontent.com",
         ]
     }
 };

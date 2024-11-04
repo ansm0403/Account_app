@@ -5,6 +5,7 @@ import Account from "@components/home/Account";
 import { CreditScoreSkeleton } from "@components/home/CreditScore";
 import { BannerSkeleton } from "@components/home/EventBanner";
 import dynamic from "next/dynamic";
+import ClientHome from "./ClientHome";
 
 const EventBanner = dynamic(()=> import("@components/home/EventBanner"), {
   ssr : false,
@@ -24,6 +25,7 @@ const CardList = dynamic(()=> import("@/components/home/CardList"),{
 })
 
 export default function Home() {
+
   return (
     <div>
       <EventBanner />
@@ -32,6 +34,7 @@ export default function Home() {
       <CreditScore />
       <Spacing size = {8} backgroundColor="gray100" />
       <CardList />
+      <ClientHome />
     </div>
   );
 }

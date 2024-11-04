@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import GlobalStyle from "@/components/style/GlobalStyle";
 import ClientProvider from "@/context/ClientProvider";
+import AuthContext from "@/context/AuthContext";
+import AuthGuard from "@/components/auth/AuthGuard";
+import Navbar from "@/components/shared/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,11 +33,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="hi">씨바루</div>
         <GlobalStyle />
-        <ClientProvider>
-          {children}
-        </ClientProvider>
+        <AuthContext>
+          <ClientProvider>
+            <AuthGuard>
+              <Navbar />
+              {children}
+            </AuthGuard>
+          </ClientProvider>
+        </AuthContext>
         <div id = 'root-portal' />
       </body>
     </html>
