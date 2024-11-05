@@ -26,7 +26,8 @@
       "@remote/" : ["src/remote/*"],
       "@constant/" : ["src/constant/*"],
       "@model/" : ["src/model/*"],
-      "@utils/" : ["src/utils/*"] 
+      "@utils/" : ["src/utils/*"],
+      "@contexts/*" : ["src/contexts/*"]
     },
     
   },

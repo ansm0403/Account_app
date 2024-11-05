@@ -5,6 +5,7 @@ import ClientProvider from "@/context/ClientProvider";
 import AuthContext from "@/context/AuthContext";
 import AuthGuard from "@/components/auth/AuthGuard";
 import Navbar from "@/components/shared/Navbar";
+import { AlertContextProvider } from "@/context/AlertContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,10 +37,12 @@ export default function RootLayout({
         <GlobalStyle />
         <AuthContext>
           <ClientProvider>
-            <AuthGuard>
-              <Navbar />
-              {children}
-            </AuthGuard>
+            <AlertContextProvider>
+              <AuthGuard>
+                <Navbar />
+                {children}
+              </AuthGuard>
+            </AlertContextProvider>
           </ClientProvider>
         </AuthContext>
         <div id = 'root-portal' />
