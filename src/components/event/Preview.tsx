@@ -8,9 +8,14 @@ import FixedBottomButton from '../shared/FixedBottomButton'
 import { useRouter } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import "../../app/global.css"
+import Button from '../shared/Button'
 
+interface Props {
+    data : Event
+    mode : 'preview' | 'edit'
+}
 
-export default function Preview({data} : {data : Event}) {
+export default function Preview({data, mode} : Props) {
     
     const router = useRouter();
 
@@ -30,12 +35,20 @@ export default function Preview({data} : {data : Event}) {
                 </ReactMarkdown>
             </div>
 
-            <FixedBottomButton 
-                label = {buttonLabels} 
-                onClick = {()=>{
-                    router.push(link)
-                }} 
-            />
+            {
+                mode === 'preview' ? (
+                    <FixedBottomButton 
+                        label = {buttonLabels} 
+                        onClick = {()=>{
+                            router.push(link)
+                        }} 
+                    />
+                ) : (
+                    <Button>{buttonLabels}</Button>
+                )
+            }
+
+            
         </Flex>
     )
 }

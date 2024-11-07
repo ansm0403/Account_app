@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 import Text from '@/components/shared/Text'
-import useDebounce from '@/components/shared/hook/useDebounce';
+import useDebounce from '@/hook/useDebounce';
 import { useQuery } from '@tanstack/react-query';
 
 export default function SearchPage() {

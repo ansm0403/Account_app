@@ -27,7 +27,8 @@
       "@constant/" : ["src/constant/*"],
       "@model/" : ["src/model/*"],
       "@utils/" : ["src/utils/*"],
-      "@contexts/*" : ["src/contexts/*"]
+      "@contexts/*" : ["src/contexts/*"],
+      "@hook/*" : ["src/hook/*"]
     },
     
   },

@@ -49,7 +49,7 @@ export default function EventForm() {
                 <TextField name= 'endDate' label='이벤트 종료' onChange={handleFormValues} value={formValue.endDate}/>
             </Flex>
             <Flex style = {{flex : 2}}>
-                <Preview data = {formValue} />
+                <Preview data = {formValue} mode='edit' />
             </Flex>
         </Flex>
         <Button onClick={handleSubmit} disabled = {enableSubmit === false}>저장하기</Button>

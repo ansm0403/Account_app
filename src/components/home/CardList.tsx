@@ -1,5 +1,5 @@
 'use client'
-import withSusepnse from '@/components/shared/hook/withSuspense'
+import withSusepnse from '@/hook/withSuspense'
 import React from 'react'
 import Text from '../shared/Text'
 import useCard from './hooks/useCard';

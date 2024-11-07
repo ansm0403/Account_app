@@ -1,4 +1,5 @@
-import Preview from '@/components/event/Preview';
+
+import PreviewContainer from '@/components/event/PreviewContainer';
 import { getEvent } from '@/remote/event';
 import React from 'react'
 
@@ -11,6 +12,6 @@ export default async function EventPage({params : {id}} : Props) {
     const event = await getEvent(id);
 
     return (
-        <Preview EventData = {event} id = {id}/>
+        <PreviewContainer EventData={event} id = {id} />
   )
 }

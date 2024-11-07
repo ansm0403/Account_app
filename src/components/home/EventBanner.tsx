@@ -1,6 +1,6 @@
 'use client'
 import useEventBanner from './hooks/useEventBanner'
-import withSusepnse from '@/components/shared/hook/withSuspense';
+import withSusepnse from '@/hook/withSuspense';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 import Flex from '../shared/Flex';

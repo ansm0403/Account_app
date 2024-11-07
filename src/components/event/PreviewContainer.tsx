@@ -39,6 +39,6 @@ export default function PreviewContainer({EventData, id} : Props) {
     }
   
     return (
-        <Preview data = {data} />
+        <Preview data = {data} mode = 'preview' />
   )
 }
