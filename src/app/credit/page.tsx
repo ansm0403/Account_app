@@ -1,5 +1,6 @@
 'use client'
 
+import useCredit from '@/components/credit/hooks/useCredit';
 import CreditScoreGraph from '@/components/shared/CreditScoreGraph';
 import Flex from '@/components/shared/Flex';
 import ListRow from '@/components/shared/ListLow';
@@ -17,11 +18,11 @@ const FixedBottomButton = dynamic(() => import('@/components/shared/FixedBottomB
 
 export default function CreditPage() {
 
-    const isCheckCreditScore = true;
-
     const user = useUser();
     const {open} = useAlertContext();
     const navigate = useRouter();
+
+    const { data : credit } = useCredit(); 
 
     const handleCheck = useCallback(()=>{
         if(user == null){
@@ -39,7 +40,7 @@ export default function CreditPage() {
 
     },[user, navigate, open])
 
-    return isCheckCreditScore ? (
+    return credit != null ? (
         <div>
             <Spacing size = {40} />
             <Flex align='center' direction='column'>
@@ -47,7 +48,7 @@ export default function CreditPage() {
                     나의 신용점수
                 </Text>
                 <Spacing size={10} />
-                <CreditScoreGraph score={0} />
+                <CreditScoreGraph score={credit.creditScore} />
             </Flex>
             <Spacing size={80} />
             <ul>

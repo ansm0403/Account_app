@@ -41,3 +41,10 @@
 
 }
 
+.agreement-container {
+    padding: 24px;
+
+    & li {
+        cursor: pointer;
+    }
+}
