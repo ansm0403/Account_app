@@ -43,6 +43,7 @@ const RAW_RUNTIME_STATE =
           ["next-auth", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:4.24.10"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:18.3.1"],\
+          ["react-hook-form", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:7.53.2"],\
           ["react-infinite-scroll-component", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:6.1.0"],\
           ["react-markdown", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:9.0.1"],\
           ["react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:3.39.3"],\
@@ -2660,6 +2661,7 @@ const RAW_RUNTIME_STATE =
           ["next-auth", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:4.24.10"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:18.3.1"],\
+          ["react-hook-form", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:7.53.2"],\
           ["react-infinite-scroll-component", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:6.1.0"],\
           ["react-markdown", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:9.0.1"],\
           ["react-query", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:3.39.3"],\
@@ -6243,6 +6245,28 @@ const RAW_RUNTIME_STATE =
           ["loose-envify", "npm:1.4.0"],\
           ["react", "npm:18.3.1"],\
           ["scheduler", "npm:0.23.2"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-hook-form", [\
+      ["npm:7.53.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/react-hook-form-npm-7.53.2-ee06f00e22-10c0.zip/node_modules/react-hook-form/",\
+        "packageDependencies": [\
+          ["react-hook-form", "npm:7.53.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:7.53.2", {\
+        "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-a4abe4b0c4/4/AppData/Local/Yarn/Berry/cache/react-hook-form-npm-7.53.2-ee06f00e22-10c0.zip/node_modules/react-hook-form/",\
+        "packageDependencies": [\
+          ["react-hook-form", "virtual:4e82925fa40678f482f62cd286014cdbb8e3c8ed197c06336d59a28ff9daf34b195e77933d60cdc0e2aed0a3c48493a61d0b7de0f93a0bdeb437f8f4db5055a1#npm:7.53.2"],\
+          ["@types/react", "npm:18.3.5"],\
+          ["react", "npm:18.3.1"]\
         ],\
         "packagePeers": [\
           "@types/react",\

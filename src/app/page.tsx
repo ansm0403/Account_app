@@ -6,6 +6,11 @@ import { CreditScoreSkeleton } from "@components/home/CreditScore";
 import { BannerSkeleton } from "@components/home/EventBanner";
 import dynamic from "next/dynamic";
 import ClientHome from "./ClientHome";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { getAccount } from "@/remote/account";
+import { User } from "@/model/user";
 
 const EventBanner = dynamic(()=> import("@components/home/EventBanner"), {
   ssr : false,
@@ -24,12 +29,16 @@ const CardList = dynamic(()=> import("@/components/home/CardList"),{
   loading : () => <CardListSkeleton />
 })
 
-export default function Home() {
+export default async function Home() {
+
+  const dehydrateState = await accountGet();
 
   return (
     <div>
       <EventBanner />
-      <Account />
+      <HydrationBoundary state = {dehydrateState}>
+        <Account />
+      </HydrationBoundary>
       <Spacing size = {8} backgroundColor="gray100" />
       <CreditScore />
       <Spacing size = {8} backgroundColor="gray100" />
@@ -37,4 +46,24 @@ export default function Home() {
       <ClientHome />
     </div>
   );
+}
+
+
+async function accountGet() : Promise<DehydratedState | undefined>{
+  const session = await getServerSession(authOptions);
+
+  if(session != null && session.user != null){
+    const client = new QueryClient();
+
+    await client.prefetchQuery({
+      queryKey : ["account", (session.user as User).id],
+      queryFn : () => getAccount((session.user as User).id),
+    })
+
+    const dehydrateState = dehydrate(client);
+
+    return dehydrateState;
+  } else {
+    return undefined;
+  }
 }

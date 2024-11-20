@@ -3,4 +3,7 @@ export const COLLECTION = {
     CARD : "CARD",
     EVENT : "EVENT",
     CREDIT : "CREDIT",
+    TERMS : "TERMS",
+    ACCOUNT : "ACCOUNT",
+    TRANSACTION : "TRANSACTION",
 }

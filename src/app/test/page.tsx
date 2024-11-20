@@ -4,6 +4,7 @@ import Text from '@/components/shared/Text'
 import CardListButton from '@/components/test/CardListButton'
 import EventBannerButton from '@/components/test/EventBannerButton'
 import EventForm from '@/components/test/EventForm'
+import TransactionForm from '@/components/test/TransactionForm'
 import React from 'react'
 
 export default function TestPage() {
@@ -18,12 +19,21 @@ export default function TestPage() {
       />
       <Text bold = {true}>카드</Text>
       <CardListButton />
+      
       <Spacing 
         size={8}
         backgroundColor='gray100'
         style = {{margin : '20px 0'}}
       />
       <EventForm />
+
+      <Spacing 
+        size={8}
+        backgroundColor='gray100'
+        style = {{margin : '20px 0'}}
+      />
+      <Text bold = {true}>입출금 테스트</Text>
+      <TransactionForm />
     </Flex>
   )
 }
