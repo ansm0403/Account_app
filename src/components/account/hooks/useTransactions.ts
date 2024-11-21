@@ -1,14 +1,15 @@
 import useUser from "@/hook/useUser";
+import { TransactionFilterType } from "@/model/transaction";
 import { getTransactions } from "@/remote/transaction";
-import { useInfiniteQuery, useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
-export default function useTransactions() {
+export default function useTransactions({filter} : {filter? : TransactionFilterType} = {}) {
   
     const user = useUser();
 
-    return useInfiniteQuery({
-        queryKey : ['transaction', user?.id],
-        queryFn : ({pageParam}) => getTransactions({ pageParam, userId : user?.id as string}),
+    return useSuspenseInfiniteQuery({
+        queryKey : ['transaction', user?.id, filter],
+        queryFn : ({pageParam}) => getTransactions({ pageParam, userId : user?.id as string, filter}),
         getNextPageParam : ({lastVisible}) => {
             return lastVisible;                            
         },

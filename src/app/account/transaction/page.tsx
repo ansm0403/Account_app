@@ -16,8 +16,8 @@ export default async function TransactionMainPage() {
 
         const userId = (session.user as User).id;
 
-        await client.prefetchInfiniteQuery({
-            queryKey : ['transaction', userId],
+        client.prefetchInfiniteQuery({
+            queryKey : ['transaction', userId, 'all'],
             queryFn : () => getTransactions({userId}),
             initialPageParam : undefined,
         })
@@ -29,7 +29,5 @@ export default async function TransactionMainPage() {
         )
     }
 
-    return (
-        <></>
-    )
+    return <></>
 }
