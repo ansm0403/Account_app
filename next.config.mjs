@@ -4,6 +4,7 @@ const nextConfig = {
         domains : [
             "cdn2.iconfinder.com",
             "lh3.googleusercontent.com",
+            "www.iconfinder.com"
         ]
     }
 };

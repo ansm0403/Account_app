@@ -11,6 +11,7 @@ import addDelimiter from '@/utils/addDelimiter';
 import { Transaction } from '@/model/transaction';
 import Link from 'next/link';
 import Button from '../shared/Button';
+import Spacing from '../shared/Spacing';
 
 function Transactions() {
 
@@ -22,8 +23,8 @@ function Transactions() {
 
     return (
         <div>
-            <Text bold = {true} style = {{padding : 24}}>입출금 내역</Text>
-        
+            <Text bold = {true} style = {{padding : 12}}>입출금 내역</Text>
+            <Spacing size = {20}/>
             {
                 transactions?.length === 0 
                 ? (
@@ -64,6 +65,7 @@ function Transactions() {
                     </ul>
                 )
             }
+             <Spacing size = {30}/>
             <Link href = "/account/transaction">
                 <Button full = {true} size = "medium" weak={true}>
                     자세히 보기
