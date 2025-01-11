@@ -42,11 +42,19 @@ function Navbar() {
     }, [session, showSignInButton])
 
     return (
-        <Flex justify='space-between' align='center' style={{position : "sticky",...navbarStyles}}>
-            <Link href = "/">My Account</Link>
+        <Flex justify='space-between' align='center' style={{position : "sticky",...navbarStyles}} >
+            <div style = {homeNavbarStyles}>
+                <Link href = "/">My Account</Link>
+            </div>
             {renderButton()}
         </Flex>
     )
+}
+
+const homeNavbarStyles = {
+    fontWeight : "bold",
+    color : `${colors.blue980}`,
+    fontSize : "1.2rem",
 }
 
 const navbarStyles = {
