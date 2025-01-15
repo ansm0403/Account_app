@@ -4,7 +4,6 @@ import Badge from "@/components/shared/Badge";
 import Input from "@/components/shared/Input";
 import ListRow from "@/components/shared/ListLow";
 import Top from "@/components/shared/Top";
-import { Card } from "@/model/card";
 
 import { getCards } from "@/remote/card";
 import { useInfiniteQuery } from "@tanstack/react-query";

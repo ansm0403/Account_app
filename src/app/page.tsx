@@ -7,10 +7,11 @@ import { BannerSkeleton } from "@components/home/EventBanner";
 import dynamic from "next/dynamic";
 import ClientHome from "./ClientHome";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+
 import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { getAccount } from "@/remote/account";
 import { User } from "@/model/user";
+import { authOptions } from "./auth/authOptions";
 
 const EventBanner = dynamic(()=> import("@components/home/EventBanner"), {
   ssr : false,

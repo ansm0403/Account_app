@@ -1,9 +1,9 @@
 
+import { authOptions } from '@/app/auth/authOptions';
 import NewAccount from '@/components/account/newAccount';
 import { User } from '@/model/user';
 import { getAccount, getTerms } from '@/remote/account';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../../api/auth/[...nextauth]/route';
 
 
 let initialStep = 0;

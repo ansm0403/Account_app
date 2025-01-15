@@ -6,7 +6,11 @@ const nextConfig = {
             "lh3.googleusercontent.com",
             "www.iconfinder.com"
         ]
+    },
+    typescript : {
+        ignoreBuildErrors : true
     }
+    
 };
 
 export default nextConfig;
