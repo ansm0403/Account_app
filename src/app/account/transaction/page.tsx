@@ -1,5 +1,4 @@
-
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/app/auth/authOptions';
 import TransactionPage from '@/components/account/TransactionPage'
 import { User } from '@/model/user';
 import { getTransactions } from '@/remote/transaction';
