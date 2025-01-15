@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Flex from '../shared/Flex';
 import Text from '../shared/Text';
 import Skeleton from '../shared/Skeletion';
+import Image from "next/image"
 
 function EventBanner() {
   const { data } = useEventBanner()
@@ -27,7 +28,8 @@ function EventBanner() {
                   <Text bold= {true}>{banner.title}</Text>
                   <Text typography='t6'>{banner.subTitle}</Text>
                 </Flex>
-                <img src = {banner.iconUrl} width={40} height={40} alt = "" />
+                <Image src = {banner.iconUrl} width={40} height={40} alt = "eventbanner-img" />
+                
               </Flex>  
             </Link>
           </SwiperSlide>
