@@ -6,7 +6,7 @@ import { colors } from '@/styles/colorPalette';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Button from './Button';
 import Loading from './Loading';
 
@@ -14,7 +14,6 @@ function Navbar() {
     
     const {data : session } = useSession();
     const [ loading, setLoading ] = useState(false);
-    const router = useRouter();
     const pathname = usePathname();
     const showSignInButton = ['/auth/signin'].includes(pathname) === false
     

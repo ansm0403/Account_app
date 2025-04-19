@@ -15,7 +15,7 @@ interface Props {
 export default function PreviewContainer({EventData, id} : Props) {
     const {open} = useAlertContext(); 
 
-    const {data} = useQuery({
+    const { data } = useQuery({
         queryKey : ["event", id],
         queryFn : () => getEvent(id),
         initialData : EventData,
@@ -36,6 +36,6 @@ export default function PreviewContainer({EventData, id} : Props) {
     })
 
     return (
-        <Preview data = {EventData} mode = 'preview' />
+        <Preview data = {EventData ?? data} mode = 'preview' />
   )
 }

@@ -11,9 +11,6 @@ import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from "@tan
 import { getAccount } from "@/remote/account";
 import { User } from "@/model/user";
 import { authOptions } from "./auth/authOptions";
-import Markdown from "react-markdown";
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
 
 const EventBanner = dynamic(()=> import("@components/home/EventBanner"), {
   ssr : false,

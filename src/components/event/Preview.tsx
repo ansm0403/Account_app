@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation'
 import Button from '../shared/Button'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
 import Loading from '../shared/Loading'
 
 interface Props {
@@ -53,7 +52,7 @@ export default function Preview({data, mode} : Props) {
     const router = useRouter();
     const [ loading, setLoading ] = useState(false);
 
-    const {title, subTitle, buttonLabels, link, contents} = data
+    const {title, subTitle, buttonLabels, link} = data
 
     return (
         <>
