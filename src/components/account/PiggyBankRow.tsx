@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import ListRow from '../shared/ListLow'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -12,19 +12,20 @@ import { differenceInDays } from 'date-fns'
 import Flex from '../shared/Flex'
 import Text from '../shared/Text'
 import addDelimiter from '@/utils/addDelimiter'
+import Loading from '../shared/Loading'
 
 function PiggyBankRow() {
 
   const navigate = useRouter();
   const user = useUser();
+  const [ loading, setLoading ] = useState(false);
 
   const { data } = useSuspenseQuery({
     queryKey : ['piggybank', user?.id],
     queryFn : () => getPiggybank(user?.id as string),
   })
 
-  console.log(data);
-  
+
   if(data == null) {
     return (
       <div>
@@ -43,10 +44,12 @@ function PiggyBankRow() {
             }
             withArrow = {true}
             onClick={()=>{
+              setLoading(true);
               navigate.push('/account/piggybank/new')
             }}
           />
         </ul>
+        {loading && <Loading />}
       </div>
     )
   }

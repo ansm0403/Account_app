@@ -1,6 +1,7 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+// import { cert } from "firebase-admin/app"
 // import { getAnalytics } from "firebase/analytics";
 
 export const app = getApps().length > 0 ? getApp() : initializeApp({
@@ -15,6 +16,14 @@ export const app = getApps().length > 0 ? getApp() : initializeApp({
 
 
 export const store = getFirestore(app);
+// export const store = initFirestore({
+//     credential : cert({
+//         projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+//         privateKey: process.env.NEXT_PUBLIC_PRIVATE_KEY,
+//         clientEmail : process.env.NEXT_PUBLIC_CLIENT_EMAIL
+//     })
+// });
+
 export const auth = getAuth(app);
 
 // export const analytics = getAnalytics(app);

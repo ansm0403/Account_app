@@ -18,9 +18,10 @@ function FullPageLoader({ message }: { message?: string }) {
     >
       <Flex direction="column" align="center">
         <Image
-          width={120}
+          width={200}
+          height={200}
           src="https://cdn.pixabay.com/animation/2023/06/13/15/12/15-12-47-323_512.gif"
-          alt=""
+          alt="pageLoader"
         />
          
 

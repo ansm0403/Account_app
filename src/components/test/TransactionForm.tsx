@@ -56,7 +56,6 @@ export default function TransactionForm() {
             balance,
         } as Transaction
 
-        console.log("newTransaction : ", newTransaction );
         
         await Promise.all([
             createTransaction(newTransaction), 

@@ -6,6 +6,7 @@ import AuthContext from "@/context/AuthContext";
 import AuthGuard from "@/components/auth/AuthGuard";
 import Navbar from "@/components/shared/Navbar";
 import { AlertContextProvider } from "@/context/AlertContext";
+import LoadingContext from "@/context/LoadingContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,8 +40,10 @@ export default function RootLayout({
           <ClientProvider>
             <AlertContextProvider>
               <AuthGuard>
+                <LoadingContext>
                 <Navbar />
                 {children}
+                </LoadingContext>
               </AuthGuard>
             </AlertContextProvider>
           </ClientProvider>

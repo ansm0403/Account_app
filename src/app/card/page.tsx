@@ -16,8 +16,6 @@ export default async function CardListPage(){
 
     const dehydrateState = dehydrate(client);
 
-    console.log(dehydrateState.queries);
-
     return (
         <div>
             <HydrationBoundary state={dehydrateState}>

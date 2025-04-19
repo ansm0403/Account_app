@@ -5,7 +5,6 @@ import Account from "@components/home/Account";
 import { CreditScoreSkeleton } from "@components/home/CreditScore";
 import { BannerSkeleton } from "@components/home/EventBanner";
 import dynamic from "next/dynamic";
-import ClientHome from "./ClientHome";
 import { getServerSession } from "next-auth";
 
 import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from "@tanstack/react-query";
@@ -44,7 +43,6 @@ export default async function Home() {
       <CreditScore />
       <Spacing size = {8} backgroundColor="gray100" />
       <CardList />
-      <ClientHome />
     </div>
   );
 }

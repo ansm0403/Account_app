@@ -8,7 +8,8 @@ export default async function SignInPage() {
 
     const providers = await getProviders();
 
-    console.log("provider : ", providers);
+    if(!providers) return null;
+
     return (
         <div>
             <Signin providers = {providers}/>

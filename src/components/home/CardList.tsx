@@ -1,6 +1,6 @@
 'use client'
 import withSusepnse from '@/hook/withSuspense'
-import React from 'react'
+import React, { useState } from 'react'
 import Text from '../shared/Text'
 import useCard from './hooks/useCard';
 import ListRow from '../shared/ListLow';
@@ -8,13 +8,14 @@ import Badge from '../shared/Badge';
 import Button from '../shared/Button';
 import Skeleton from '../shared/Skeletion';
 import { useRouter } from 'next/navigation';
+import Loading from '../shared/Loading';
 
 
 function CardList() {
   const { data } = useCard()
   const navigate = useRouter()
+  const [loading, setLoading] = useState(false);
 
-  console.log("CardListComponent : ", data);
   const isShowMoreButton = data?.items.length ?? 0 > 5
 
   return (
@@ -35,6 +36,7 @@ function CardList() {
             right={card.payback != null ? <Badge label={card.payback} /> : null}
             withArrow={true}
             onClick={() => {
+              setLoading(true);
               navigate.push(`/card/${card.id}`)
             }}
           />
@@ -47,6 +49,7 @@ function CardList() {
             weak={true}
             size="medium"
             onClick={() => {
+              setLoading(true);
               navigate.push('/card')
             }}
           >
@@ -54,6 +57,9 @@ function CardList() {
           </Button>
         </div>
       ) : null}
+      {
+        loading && <Loading />
+      }
     </div>
   )
 }

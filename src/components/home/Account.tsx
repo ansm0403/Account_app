@@ -9,12 +9,19 @@ import useAccout from "@/hook/useAccout"
 import useUser from "@/hook/useUser"
 import addDelimiter from "@/utils/addDelimiter"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import Loading from "../shared/Loading"
 
-export default function Account(){
+function Account(){
     
     const { data : account } = useAccout();
+    const [ loading, setLoading ] = useState(false);
+
+    // const { loading, setLoading } = useLoadingContext();
 
     const user = useUser();
+    const router = useRouter();
 
     if(account == null){
         return (
@@ -25,8 +32,8 @@ export default function Account(){
                             {"계좌개설이 더 쉽고 빨라졌어요."}
                         </Text>
                         <Spacing size = {8} />
-                        <Link href = {"/account"}>
-                            <Button>{"3분만에 개설하기"}</Button>
+                        <Link href = {"/account/new"} >
+                            <Button onClick = {()=>{ setLoading(true) }}>{"3분만에 개설하기"}</Button>
                         </Link>
                     </Flex>
                     <Image 
@@ -77,10 +84,18 @@ export default function Account(){
                         {addDelimiter(account.balance)}원
                     </Text>
                 </Flex>
-                <Link href = "/account">
-                    <Button>분석</Button>
-                </Link>
+                {/* <Link href = "/account"> */}
+                    <Button onClick = {()=>{
+                        setLoading(true);
+                        router.push("/account")
+                    }}>분석</Button>
+                {/* </Link> */}
             </Flex>
+            {
+                loading && <Loading />
+            }
         </div>
     )
 }
+
+export default Account;

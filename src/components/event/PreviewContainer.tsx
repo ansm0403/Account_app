@@ -13,13 +13,14 @@ interface Props {
 }
 
 export default function PreviewContainer({EventData, id} : Props) {
-    const {open} = useAlertContext();
+    const {open} = useAlertContext(); 
 
-    const {data} = useQuery({
+    const { data } = useQuery({
         queryKey : ["event", id],
         queryFn : () => getEvent(id),
         initialData : EventData,
         select : (event) => {
+
             const isEndEvent = isAfter(new Date(), parseISO(event.endDate))
         
             if(isEndEvent) {
@@ -34,11 +35,7 @@ export default function PreviewContainer({EventData, id} : Props) {
         }
     })
 
-    if (data == null) {
-        return null;
-    }
-  
     return (
-        <Preview data = {data} mode = 'preview' />
+        <Preview data = {EventData ?? data} mode = 'preview' />
   )
 }

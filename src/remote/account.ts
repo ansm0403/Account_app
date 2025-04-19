@@ -5,26 +5,36 @@ import { Account } from "@/model/account";
 
 
 export function setTerms({
-    userId, termIds
+    userId, cardId, termIds, type
 } : {
-    userId : string; termIds : string[]
+    userId? : string; cardId? : string, termIds : string[], type : string
 }){
-   return setDoc(doc(collection(store, COLLECTION.TERMS), userId), {
-    userId,
-    termIds,
-   })
+    if(type === "card"){
+        console.log("CARD Terms 등록 함 ㅋㅋ")
+        return setDoc(doc(collection(store, COLLECTION.TERMS), cardId), {
+            userId,
+            cardId,
+            termIds,
+            type
+           })
+    }
+    return setDoc(doc(collection(store, COLLECTION.TERMS), userId), {
+        userId,
+        termIds,
+        type
+    })
 }
 
-export async function getTerms(userId : string){
-    const snapshot = await getDoc(doc(collection(store, COLLECTION.TERMS), userId))
+export async function getTerms(id : string){
+    const snapshot = await getDoc(doc(collection(store, COLLECTION.TERMS), id))
 
     if (snapshot.exists() === false){
         return null;
     }
-
+    
     return {
         id : snapshot.id,
-        ...(snapshot.data() as {userId : string; termIds : string[]})
+        ...(snapshot.data() as {userId : string; termIds : string[]; type : string})
     }
 }
 

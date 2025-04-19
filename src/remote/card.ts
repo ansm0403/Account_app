@@ -11,15 +11,13 @@ export async function getCards(pageParam? : QuerySnapshot<Card>){
     const cardSnapshot = await getDocs(cardQuery)
     const lastVisible = cardSnapshot.docs[cardSnapshot.docs.length - 1]
 
-
     const items = cardSnapshot.docs.map((doc) => ({
         id : doc.id,
         ...(doc.data() as Card),
     }))
 
-    return {items, lastVisible}
+    return { items, lastVisible }
 }
-
 
 export async function getSearchCard(keyword : string){
     const searchQuery = query(
@@ -27,7 +25,7 @@ export async function getSearchCard(keyword : string){
         where("name", ">=", keyword),
         where("name", "<=", keyword + '\uf8ff'),
     )
-    console.log("서치 시작")
+
     const cardSnapshot = await getDocs(searchQuery);
 
     return cardSnapshot.docs.map((doc) => ({

@@ -15,7 +15,6 @@ function withAuth<Props = Record<string, never>>(
 
     if(status !== 'loading' && data == null) {
         router.replace('/auth/signin');
-
         return null;
     }
 
@@ -24,3 +23,4 @@ function withAuth<Props = Record<string, never>>(
 }
 
 export default withAuth
+

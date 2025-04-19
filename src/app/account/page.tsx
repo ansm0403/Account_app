@@ -1,14 +1,16 @@
 
 import Spacing from '@/components/shared/Spacing'
+import withServerAuth from '@/hook/withServerAuth'
+
 import dynamic from 'next/dynamic'
 
 const Transactions = dynamic(()=> import('@/components/account/Transactions'))
 const PiggyBankRow = dynamic(()=> import('@/components/account/PiggyBankRow'))
 const MonthlyChart = dynamic(()=> import('@/components/account/MonthlyChart'))
 const CategoryPieChart = dynamic(()=> import('@/components/account/CategoryPieChart'))
+ 
+function AccountPage() {
 
-
-export default function AccountPage() {
   return (
     <div>
         <MonthlyChart chartData={generateMonthlyChartData()} />
@@ -21,6 +23,8 @@ export default function AccountPage() {
     </div>
   )
 }
+
+export default withServerAuth(AccountPage);
 
 function generatePieChartData(){
   return [
