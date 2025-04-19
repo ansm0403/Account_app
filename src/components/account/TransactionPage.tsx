@@ -44,8 +44,7 @@ function TransactionPage() {
 
     const transactions = data?.pages.map(({items}) => items).flat() as Transaction[];
 
-    console.log("transaction : ", data);
-    
+
     return (
         <div>
             <Flex as = 'ul' justify='flex-end' style = {{padding : 24}}>

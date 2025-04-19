@@ -42,7 +42,35 @@ export const FORMS = [
   },
   {
     id: 'accountName',
-    label: '통장이름',
+    label: '사용할 통장이름',
+    required: true,
+    type: 'TEXT_FIELD',
+  },
+] as AccountForm[]
+
+
+export const CARDFORMS = [
+  {
+    id: 'name',
+    label: '한글명',
+    required: true,
+    type: 'TEXT_FIELD',
+  },
+  {
+    id: 'phone',
+    label: '휴대전화번호',
+    required: true,
+    type: 'TEXT_FIELD',
+  },
+  {
+    id: 'email',
+    label: '이메일',
+    required: true,
+    type: 'TEXT_FIELD',
+  },
+  {
+    id: 'cardName',
+    label: '사용할 카드이름',
     required: true,
     type: 'TEXT_FIELD',
   },

@@ -4,7 +4,10 @@ const nextConfig = {
         domains : [
             "cdn2.iconfinder.com",
             "lh3.googleusercontent.com",
-            "www.iconfinder.com"
+            "www.iconfinder.com",
+            "cdn1.iconfinder.com",
+            "cdn4.iconfinder.com",
+            "cdn.pixabay.com"
         ]
     },
     typescript : {

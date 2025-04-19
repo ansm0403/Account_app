@@ -47,9 +47,6 @@ export default function CheckPage() {
 
     }, [isSuccess, isError, status, open, mutate])
 
-    console.log("status : ", status);
-    
-
     return (
         <div>
             <FullPageLoader message={STATUS_CHECK_MESSAGE[status ?? 'READY']} />

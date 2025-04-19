@@ -7,7 +7,7 @@ import Agreement from '../shared/Agreement';
 import FixedBottomButton from '../shared/FixedBottomButton';
 
 interface Props {
-    onNext : (termsIds : string[]) => void
+    onNext : { nextTerms : (termsIds : string[]) => void}
 }
 
 export default function Terms({onNext} : Props) {
@@ -59,7 +59,7 @@ export default function Terms({onNext} : Props) {
                 label = "약관동의"
                 disabled = {isAllEssentialTermsTrue === false}
                 onClick={()=>{
-                    onNext(
+                    onNext.nextTerms(
                         termsAgreement
                         .filter((term) => term.checked)
                         .map(( { id }) => id)

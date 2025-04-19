@@ -9,3 +9,14 @@ export interface Card {
     },
     payback? : string
 }
+
+export interface UserCard {
+    cardName : string,
+    cardNumber : number,
+    email : string,
+    name : string,
+    phone : string,
+    status : "READY" | "DONE",
+    userId : string,
+    cardId : string
+}

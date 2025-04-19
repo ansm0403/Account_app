@@ -3,12 +3,13 @@
 import Badge from "@/components/shared/Badge";
 import Input from "@/components/shared/Input";
 import ListRow from "@/components/shared/ListLow";
+import Loading from "@/components/shared/Loading";
 import Top from "@/components/shared/Top";
 
 import { getCards } from "@/remote/card";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
@@ -22,24 +23,25 @@ export default function CardList() {
         },
     })
     
-      const navigate = useRouter()
+    const [loading, setLoading] = useState(false);
+      
+    const navigate = useRouter()
     
-      const loadMore = useCallback(() => {
+      
+    const loadMore = useCallback(() => {
         if (hasNextPage === false || isFetching) {
           return
         }
-    
         fetchNextPage()
-      }, [hasNextPage, fetchNextPage, isFetching])
+    }, [hasNextPage, fetchNextPage, isFetching])
     
-      if (data == null) {
+      
+    if (data == null) {
         return null
-      }
+    }
     
 
     const cards = data?.pages.map(({ items }) => items).flat()
-
-    console.log(cards);
 
     return (
         <div>
@@ -65,12 +67,14 @@ export default function CardList() {
                     right = {card.payback != null ? <Badge label = {card.payback} /> : null}
                     withArrow = {true}
                     onClick={()=>{
-                    navigate.push(`/card/${card.id}`)
+                        setLoading(true);
+                        navigate.push(`/card/${card.id}`)
                     }}
                 />))
                 }
                 </ul>
             </InfiniteScroll>
+            { loading && <Loading /> }
         </div>
     )
 }

@@ -5,12 +5,14 @@ import Top from '@/components/shared/Top';
 import { getCard } from '@/remote/card';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'; 
 import Flex from '@/components/shared/Flex';
 import Text from '@/components/shared/Text'
 
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
+import Loading from '@/components/shared/Loading';
 
 const FixedBottomButton = dynamic(()=> import('@/components/shared/FixedBottomButton'),{
     ssr : false,
@@ -27,8 +29,9 @@ export default function DetailCard({cardId} : Props) {
         queryFn : () => getCard(cardId),
      })
 
-    console.log("디테일 카드 ", detailCard);
-    
+     const [ loading, setLoading ] = useState(false);
+     const router = useRouter()
+
      if (detailCard == null) {
         return;
      }
@@ -55,7 +58,7 @@ export default function DetailCard({cardId} : Props) {
                                     src = "/images/check_circle_icon.png"
                                     width = {40} 
                                     height = {40} 
-                                    alt = ""
+                                    alt = {`check_circle_icon_${text}`}
                                 />}
                             contents = {
                                 <ListRow.Texts title = {`헤택 : ${index + 1}`} subTitle = {text} />
@@ -75,9 +78,13 @@ export default function DetailCard({cardId} : Props) {
             <FixedBottomButton
                 label = "1분만에 신청하고 혜택받기"
                 onClick={()=>{
-
+                    setLoading(true);
+                    router.push(`/card/new/${cardId}`)
                 }}
             />
+            {
+                loading && <Loading />
+            }
         </div>
     )
 }

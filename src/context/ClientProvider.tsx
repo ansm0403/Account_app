@@ -12,7 +12,7 @@ export default function ClientProvider({children} : Props) {
   const client = new QueryClient({
     queryCache : new QueryCache({
       onError : (error) => 
-        console.log("에러 : ", error.message)
+        console.log(error.message)
     })
   })
     

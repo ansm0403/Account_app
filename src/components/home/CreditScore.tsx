@@ -1,6 +1,5 @@
 'use client'
 
-
 import Link from 'next/link'
 import CreditScoreChart from '../shared/CreditScoreGraph'
 import Flex from '@shared/Flex'
@@ -9,9 +8,12 @@ import Button from '@shared/Button'
 import Spacing from '@shared/Spacing'
 import Skeleton from '../shared/Skeletion'
 import useCredit from '../credit/hooks/useCredit'
+import { useState } from 'react'
+import Loading from '../shared/Loading'
 
 function CreditScore() {
   const { data, isLoading } = useCredit()
+  const [ loading, setLoading ] = useState(false);
 
   if (isLoading) {
     return <CreditScoreSkeleton />
@@ -27,7 +29,7 @@ function CreditScore() {
           </Text>
           <Spacing size={8} />
           <Link href="/credit">
-            <Button>내 신용점수 보러가기</Button>
+            <Button onClick = {()=>{setLoading(true)}}>내 신용점수 보러가기</Button>
           </Link>
         </Flex>
         <CreditScoreChart
@@ -36,6 +38,9 @@ function CreditScore() {
           score={data?.creditScore ?? 0}
         />
       </Flex>
+      {
+        loading && <Loading />
+      }
     </div>
   )
 }
@@ -54,4 +59,4 @@ export function CreditScoreSkeleton() {
   )
 }
 
-export default CreditScore
+export default CreditScore;

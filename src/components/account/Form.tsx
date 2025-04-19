@@ -1,5 +1,5 @@
 
-import { FORMS } from '@/constant/account'
+import { CARDFORMS, FORMS } from '@/constant/account'
 import { AccountForm } from '@/model/account'
 import { Fragment, useCallback } from 'react'
 import {useForm} from 'react-hook-form'
@@ -18,9 +18,10 @@ const FixedBottomButton = dynamic(() => import('@shared/FixedBottomButton'), {
 
 interface Props {
     onNext : (formValues : FormData) => void
+    type? : string
 }
 
-export default function Form({onNext} : Props) {
+export default function Form({onNext, type} : Props) {
 
     const { register, formState, handleSubmit } = useForm<FormData>({
         mode : 'onBlur'
@@ -52,14 +53,29 @@ export default function Form({onNext} : Props) {
     return (
         <div style = {{padding : "24px"}}>
             <form>
-                {FORMS.map((form)=>{
-                    return (
-                        <Fragment key ={form.id}>
-                            {component(form)}
-                            <Spacing size = {8} />
-                        </ Fragment>
+                {
+                    type === 'card' 
+                    ? (
+                        CARDFORMS.map((form)=>{
+                            return (
+                                <Fragment key ={form.id}>
+                                    {component(form)}
+                                    <Spacing size = {8} />
+                                </ Fragment>
+                            )
+                        })
+                    ) 
+                    : (
+                        FORMS.map((form)=>{
+                            return (
+                                <Fragment key ={form.id}>
+                                    {component(form)}
+                                    <Spacing size = {8} />
+                                </ Fragment>
+                            )
+                        })
                     )
-                })}
+                }
             </form>
 
             <FixedBottomButton label = "개설하기" onClick = {handleSubmit(onNext)} />

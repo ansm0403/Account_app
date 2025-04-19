@@ -7,12 +7,13 @@ import Flex from '../shared/Flex';
 import Text from '../shared/Text';
 import Skeleton from '../shared/Skeletion';
 import Image from "next/image"
+import { useState } from 'react';
+import Loading from '../shared/Loading';
 
 function EventBanner() {
   const { data } = useEventBanner()
+  const [ loading, setLoading ] = useState(false);
 
-  console.log("data",  data);
-  
   return (
     <div style={{padding : 24}}>
       <Swiper spaceBetween={8}>
@@ -23,6 +24,7 @@ function EventBanner() {
               <Flex 
                 style={{backgroundColor : banner.backgroundColor, ...bannerStyle}}
                 justify='space-between'  
+                onClick={()=>{setLoading(true)}}
               >
                 <Flex direction='column'>
                   <Text bold= {true}>{banner.title}</Text>
@@ -36,6 +38,9 @@ function EventBanner() {
           )
         })}
       </Swiper>
+      {
+        loading && <Loading />
+      }
     </div>
   )
 }
@@ -55,4 +60,4 @@ export function BannerSkeleton() {
 
 export default withSusepnse(EventBanner, {
   fallback : <BannerSkeleton />
-  })
+})

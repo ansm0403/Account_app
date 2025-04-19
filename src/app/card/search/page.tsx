@@ -17,8 +17,6 @@ export default function SearchPage() {
     const [keyword, setKeyword] = useState('')
     const debouncedKeyword  = useDebounce(keyword);
 
-    console.log("debounce : ", debouncedKeyword);
-    
     const navigate = useRouter();
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -35,9 +33,6 @@ export default function SearchPage() {
         }
     },[])
 
-    console.log("keyword : ", keyword);
-    console.log("search : ", data);
-    
     const handlekeyword = useCallback((e : ChangeEvent<HTMLInputElement>)=>{
         setKeyword(e.target.value);
     }, [])

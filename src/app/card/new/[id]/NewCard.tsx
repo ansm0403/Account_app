@@ -5,19 +5,29 @@ import Terms from '@/components/account/Terms';
 import ProgressBar from '@/components/shared/ProgressBar';
 import useUser from '@/hook/useUser';
 import withAuth from '@/hook/withAuth';
-import { Account } from '@/model/account';
-import { createAccount, setTerms } from '@/remote/account';
+import { setTerms } from '@/remote/account';
 import React, { useState } from 'react'
-import FullPageLoader from '../shared/FullPageLoader';
+import FullPageLoader from '../../../../components/shared/FullPageLoader';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+import { createUserCard } from '@/remote/userCard';
+import { UserCard } from '@/model/card';
 
 
-const FixedBottomButton = dynamic(()=>import('../shared/FixedBottomButton')) 
+const FixedBottomButton = dynamic(()=>import('../../../../components/shared/FixedBottomButton')) 
 
 const LAST_STEP = 2;
 
-function NewAccount({initialStep} : {initialStep : number}) {
+interface NewCardProps {
+    cardId : string,
+    initialStep : number
+}
+
+function NewCard({
+    cardId,
+    initialStep
+} : NewCardProps
+) {
 
     const [step, setStep] = useState(initialStep);
 
@@ -27,8 +37,9 @@ function NewAccount({initialStep} : {initialStep : number}) {
     const nextTerms = async (termIds : any) => {
         await setTerms({
             userId : user?.id as string, 
+            cardId,
             termIds,
-            type : "account",
+            type : "card",
         })
         
         setStep(step + 1);
@@ -45,25 +56,26 @@ function NewAccount({initialStep} : {initialStep : number}) {
             {
                 step === 1
                 ? <Form onNext = { async (formValues)=>{
-                        const newAccount = {
+                        const newCard = {
                             ...formValues,
-                            accountNumber: Date.now(),
-                            balance : 0,
+                            cardNumber: Date.now(),
                             status : 'READY',
                             userId : user?.id as string,
-                        } as Account
+                            cardId
+                        } as UserCard
                         
-                        await createAccount(newAccount)
+                        await createUserCard(newCard)
 
                         setStep(step + 1);
                     }}
+                    type = 'card'
                 />
                 : null
             }
             {
                 step === 2
                 ? <>
-                    <FullPageLoader message='계좌개설 신청이 완료되었어요.' />
+                    <FullPageLoader message='카드 신청이 완료되었어요.' />
                     <FixedBottomButton label = "확인" onClick = {() => navigate.push('/')}/>
                 </>
                 : null
@@ -72,4 +84,4 @@ function NewAccount({initialStep} : {initialStep : number}) {
     )
 }
 
-export default withAuth(NewAccount);
+export default withAuth(NewCard);

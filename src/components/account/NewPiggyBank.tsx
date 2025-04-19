@@ -11,6 +11,7 @@ import useUser from '../../hook/useUser'
 import { createPiggybank } from '../../remote/piggybank'
 import { useMutation } from '@tanstack/react-query'
 import { useAlertContext } from '../../context/AlertContext'
+import Loading from '../shared/Loading';
 
 const FixedBottomButton = dynamic(() => import('../shared/FixedBottomButton'), {
   ssr : false
@@ -27,6 +28,7 @@ function NewPiggyBank() {
   })
 
   const user = useUser();
+  const [ loading, setLoading ] = useState(false);
 
   const { mutate, isPending } = useMutation({
     mutationFn : (newPiggybank : PiggyBank)=> createPiggybank(newPiggybank),
@@ -82,9 +84,11 @@ function NewPiggyBank() {
         disabled = {isPending === true}
         label = {"저금통 생성하기"}
         onClick={()=>{
+          setLoading(false);
           handleSubmit();
         }}
       />
+      { loading && <Loading /> }
     </div>
     
   )

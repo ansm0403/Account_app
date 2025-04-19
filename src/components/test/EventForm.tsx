@@ -44,7 +44,7 @@ export default function EventForm() {
                 <TextField name='title' label='이벤트 제목' onChange={handleFormValues} value={formValue.title}/>
                 <TextField name='subTitle' label='이벤트 부제목' onChange={handleFormValues} value={formValue.subTitle}/>
                 <textarea style = {{height : 400}} name='contents' onChange={handleFormValues} value={formValue.contents}/>
-                <TextField name='buttonLabel' label='버튼명' onChange={handleFormValues} value={formValue.buttonLabels}/>
+                <TextField name='buttonLabels' label='버튼명' onChange={handleFormValues} value={formValue.buttonLabels}/>
                 <TextField name='link' label='링크' onChange={handleFormValues} value={formValue.link}/>
                 <TextField name= 'endDate' label='이벤트 종료' onChange={handleFormValues} value={formValue.endDate}/>
             </Flex>

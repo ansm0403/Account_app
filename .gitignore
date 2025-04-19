@@ -50,3 +50,5 @@ next-env.d.ts
 
 .env
 .vercel
+
+# firebase key
