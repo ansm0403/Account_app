@@ -1,11 +1,11 @@
-import useAccout from "@/hook/useAccout";
+import useAccount from "@/hook/useAccount";
 import { getEventBanner } from "@/remote/banner";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 
 function useEventBanner(){
 
-    const {data : account} = useAccout();
+    const {data : account} = useAccount();
 
     return useSuspenseQuery({
         queryKey : ['event-banner'], 

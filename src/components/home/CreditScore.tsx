@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import CreditScoreChart from '../shared/CreditScoreGraph'
 import Flex from '@shared/Flex'
-import Text from '@shared/Text'
 import Button from '@shared/Button'
 import Spacing from '@shared/Spacing'
 import Skeleton from '../shared/Skeletion'
@@ -23,13 +22,13 @@ function CreditScore() {
     <div style={{ padding: 24 }}>
       <Flex justify="space-between" align="center">
         <Flex direction="column">
-          <Text bold={true}>
+          {/* <Text bold={true}>
             나의 신용도를 증명하고 <br />
             점수를 올리세요
-          </Text>
+          </Text> */}
           <Spacing size={8} />
           <Link href="/credit">
-            <Button onClick = {()=>{setLoading(true)}}>내 신용점수 보러가기</Button>
+            <Button onClick = {()=>{setLoading(true)}}>내 신용점수 확인하기</Button>
           </Link>
         </Flex>
         <CreditScoreChart

@@ -16,8 +16,6 @@ export default async function NewAccountPage() {
 
     const agreedTerms = await getTerms(userId);
 
-    console.log("agreeTerms : ", agreedTerms);
-
     if(agreedTerms == null) {
         initialStep = 0;
         return (

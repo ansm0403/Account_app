@@ -70,7 +70,12 @@ function TransactionPage() {
                                     key = {transaction.userId}
                                     contents = {
                                         <ListRow.Texts 
-                                            title = {transaction.displayText} 
+                                            title = {
+                                                <div>
+                                                    {transaction.displayText}
+                                                    <span style = {{fontSize : "0.8rem", color : "gray", marginLeft : "0.5rem"}}>{`${transaction.accountNumber}`}</span>
+                                                </div>
+                                            } 
                                             subTitle = {format(
                                                 parseISO(transaction.date),
                                                 'yyyy-MM-dd HH:mm:SS',
@@ -94,5 +99,6 @@ function TransactionPage() {
         </div>
     )
 }
+
 
 export default withAuth(TransactionPage)

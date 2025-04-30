@@ -5,25 +5,53 @@ import Flex from "@shared/Flex"
 import Text from "@shared/Text"
 import Spacing from "@shared/Spacing"
 import Image from "next/image"
-import useAccout from "@/hook/useAccout"
-import useUser from "@/hook/useUser"
-import addDelimiter from "@/utils/addDelimiter"
+import useAccount from "@/hook/useAccount"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
+import styled from "@emotion/styled"
+import { colors } from "@/styles/colorPalette"
+import { keyframes } from "@emotion/react"
 import Loading from "../shared/Loading"
 
 function Account(){
     
-    const { data : account } = useAccout();
+    const { data : accounts } = useAccount();
+
+    // const [account, setaccount] = useState<AccountSnapshot[] | null>(null)
+
+    // useEffect(()=>{
+    
+    //     // const accountQuery = query(
+    //     //       collection(store, COLLECTION.ACCOUNT),
+    //     //       where("userId", "==", user?.id)
+    //     // )
+    
+    //     // const unsubscribe = onSnapshot(accountQuery, (snapshot) => {
+    //     //     if(snapshot.empty) return;
+    //     //     const account = snapshot.docs.map((doc)=>({
+    //     //           id : doc.id,
+    //     //           ...(doc.account() as AccountType)
+    //     //       })
+    //     //     )
+    //     //     console.log("snapshot : ", account);
+    //     //     setaccount(account as AccountSnapshot[]);
+    //     // })
+    
+    //     async function fetchaccount(){
+    //         const account = await getAccount(user?.id as string, setaccount);
+    //         setaccount(account);
+    //     }
+    //     fetchaccount();
+    
+    //     // return () => unsubscribe();
+        
+    // },[])
+
     const [ loading, setLoading ] = useState(false);
 
-    // const { loading, setLoading } = useLoadingContext();
+    console.log("accounts : ", accounts);
 
-    const user = useUser();
-    const router = useRouter();
-
-    if(account == null){
+    if(accounts == null){
         return (
             <div style = {{padding : 24}}>
                 <Flex justify="space-between">
@@ -43,28 +71,40 @@ function Account(){
                         height = {80}  
                     />
                 </Flex>
+                {
+                    loading && <Loading />
+                }
             </div>
         )
     }
 
+    console.log("어카운트 데이터 : ", accounts[0]);
+
+    const account = accounts[0];
+
     // 계좌 개설 심사 중
 
-    if(account.status === "READY"){
+    if(account?.status === "READY"){
         return (
             <div style = {{padding : 24}}>
-                    <Flex justify="space-between">
-                        <Flex direction="column">
-                            <Text style= {{whiteSpace : "pre-wrap"}} bold = {true}>
-                                계좌 개설 심사중입니다.
-                            </Text>
-                            <Spacing size = {8} />
-                        </Flex>
-                        <Image 
-                            src = "https://cdn2.iconfinder.com/data/icons/geest-travel-kit/128/travel_journey-18-1024.png"
-                            alt = "cash"
-                            width = {80}
-                            height = {80}  
-                        />
+                    <Flex direction = "column" align = "center" justify="center">
+                            <div style = {{position : "relative", top : "50%"}}>
+                                <div style = {{position : "absolute", top : "45%", left : "25%"}}>
+                                    <Flex direction="column">
+                                        <Text style= {{whiteSpace : "pre-wrap", "margin" : "auto 0"}} bold = {true}>
+                                            계좌 개설 심사중입니다.
+                                        </Text>
+                                        <Spacing size = {15} />
+                                    </Flex>
+                                </div>
+                                {/* <Image 
+                                    src = "https://cdn2.iconfinder.com/data/icons/geest-travel-kit/128/travel_journey-18-1024.png"
+                                    alt = "cash"
+                                    width = {80}
+                                    height = {80}  
+                                /> */}
+                                <CardSkeleton />
+                            </div>
                     </Flex>
             </div>
         )
@@ -72,30 +112,59 @@ function Account(){
 
     // 계좌 보유하고 있지 않음.
 
-    return (
-        <div style = {{padding : 24}}>
-            <Flex justify="space-between" align = "center">
-                <Flex direction="column">
-                    <Text typography = "t6" color="gray600">
-                        {`${user?.name}님의 자산`}
-                    </Text>
-                    <Spacing size = {2}/>
-                    <Text typography = "t3">
-                        {addDelimiter(account.balance)}원
-                    </Text>
-                </Flex>
-                {/* <Link href = "/account"> */}
-                    <Button onClick = {()=>{
-                        setLoading(true);
-                        router.push("/account")
-                    }}>분석</Button>
-                {/* </Link> */}
-            </Flex>
-            {
-                loading && <Loading />
-            }
-        </div>
-    )
+    if(account) return null;
+
+    // return (
+    //     <div style = {{padding : 24}}>
+    //         <Flex justify="space-between" align = "center">
+    //             <Flex direction="column">
+    //                 <Text typography = "t6" color="gray600">
+    //                     {`${user?.name}님의 자산`}
+    //                 </Text>
+    //                 <Spacing size = {2}/>
+    //                 <Text typography = "t3">
+    //                     {addDelimiter(account.balance)}원
+    //                 </Text>
+    //             </Flex>
+    //             {/* <Link href = "/account"> */}
+    //                 <Button onClick = {()=>{
+    //                     setLoading(true);
+    //                     router.push("/account")
+    //                 }}>분석</Button>
+    //             {/* </Link> */}
+    //         </Flex>
+    //         {
+    //             loading && <Loading />
+    //         }
+    //     </div>
+    // )
 }
+
+const skeletonAnimation = keyframes`
+    from, to {
+        opacity : 10%
+    }
+    50% {
+        opacity : 100%
+    }
+`
+
+const CardSkeleton = styled.div`
+    
+    border-radius : 0.4rem;
+    padding : 1rem 1rem;
+    width : 300px;
+    height : 140px;
+    max-width : 300px;
+    min-width : 150px;
+    background-color : ${colors.gray200};
+    opacity : 10%;
+    animation-name : ${skeletonAnimation};
+    animation-iteration-count : infinite;
+    animation-duration : 2s;
+`
+
+
+
 
 export default Account;

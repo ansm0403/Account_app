@@ -28,7 +28,8 @@
       "@model/" : ["src/model/*"],
       "@utils/" : ["src/utils/*"],
       "@contexts/*" : ["src/contexts/*"],
-      "@hook/*" : ["src/hook/*"]
+      "@hook/*" : ["src/hook/*"],
+      "@atom/*" : ["src/atom/*"]
     },
     
   },

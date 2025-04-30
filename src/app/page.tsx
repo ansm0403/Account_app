@@ -1,5 +1,5 @@
 // import CardList from "@/components/home/CardList";
-import { CardListSkeleton } from "@/components/home/CardList";
+// import { CardListSkeleton } from "@/components/home/CardList";
 import Spacing from "@/components/shared/Spacing";
 import Account from "@components/home/Account";
 import { CreditScoreSkeleton } from "@components/home/CreditScore";
@@ -11,6 +11,9 @@ import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from "@tan
 import { getAccount } from "@/remote/account";
 import { User } from "@/model/user";
 import { authOptions } from "./auth/authOptions";
+import MenuBar from "@/components/home/MenuBar";
+import Transactions from "@/components/account/Transactions";
+
 
 const EventBanner = dynamic(()=> import("@components/home/EventBanner"), {
   ssr : false,
@@ -24,10 +27,10 @@ const CreditScore = dynamic(()=> import("@components/home/CreditScore"),{
   loading : () => <CreditScoreSkeleton />
 })
 
-const CardList = dynamic(()=> import("@/components/home/CardList"),{
-  ssr : false,
-  loading : () => <CardListSkeleton />
-})
+// const CardList = dynamic(()=> import("@/components/home/CardList"),{
+//   ssr : false,
+//   loading : () => <CardListSkeleton />
+// })
 
 export default async function Home() {
 
@@ -35,14 +38,18 @@ export default async function Home() {
 
   return (
     <div>
-      <EventBanner />
+      <EventBanner  />
       <HydrationBoundary state = {dehydrateState}>
         <Account />
       </HydrationBoundary>
-      <Spacing size = {8} backgroundColor="gray100" />
+      <Spacing size = {4} backgroundColor="gray50" />
+      <MenuBar />
+      <Spacing size = {4} backgroundColor="gray50" />
       <CreditScore />
-      <Spacing size = {8} backgroundColor="gray100" />
-      <CardList />
+      <Spacing size = {4} backgroundColor="gray50" />
+      <Transactions />
+      {/* <Spacing size = {4} backgroundColor="gray50" />
+      <CardList /> */}
     </div>
   );
 }

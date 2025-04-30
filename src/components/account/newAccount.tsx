@@ -11,6 +11,7 @@ import React, { useState } from 'react'
 import FullPageLoader from '../shared/FullPageLoader';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+import useAccount from '@/hook/useAccount';
 
 
 const FixedBottomButton = dynamic(()=>import('../shared/FixedBottomButton')) 
@@ -20,9 +21,11 @@ const LAST_STEP = 2;
 function NewAccount({initialStep} : {initialStep : number}) {
 
     const [step, setStep] = useState(initialStep);
+    const { refetch } = useAccount();
 
     const navigate = useRouter();
     const user = useUser();
+    const today = new Date();
 
     const nextTerms = async (termIds : any) => {
         await setTerms({
@@ -32,6 +35,16 @@ function NewAccount({initialStep} : {initialStep : number}) {
         })
         
         setStep(step + 1);
+    }
+
+    const validDate = (today : Date) : string => {
+        today.setFullYear(today.getFullYear() + 5);
+        today.setHours(today.getHours() + 9);
+
+        const year = today.getFullYear().toString().slice(-2);
+        const month = ("0" + today.getMonth()).slice(-2)
+
+        return `${month}/${year}`
     }
 
     return (
@@ -47,15 +60,22 @@ function NewAccount({initialStep} : {initialStep : number}) {
                 ? <Form onNext = { async (formValues)=>{
                         const newAccount = {
                             ...formValues,
-                            accountNumber: Date.now(),
+                            accountNumber: Date.now().toString(),
+                            cardNumber : (Date.now() * 1000 + Math.floor(Math.random() * 999 + 1)).toString(), 
                             balance : 0,
+                            validThru : validDate(today),
                             status : 'READY',
                             userId : user?.id as string,
                         } as Account
                         
                         await createAccount(newAccount)
-
+    
                         setStep(step + 1);
+                        
+                        setTimeout(async ()=>{
+                            await createAccount({ ...newAccount, status : 'DONE' })
+                            refetch();
+                        }, 10000)
                     }}
                 />
                 : null

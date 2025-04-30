@@ -27,8 +27,10 @@ type AccountStatus = 'READY' | "DONE"
 
 export interface Account {
     accountName : string,
-    accountNumber : number,
+    accountNumber : string,
+    cardNumber : string,
     balance : number,
+    validThru : string,
     email : string,
     name : string,
     phone : string,

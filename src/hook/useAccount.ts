@@ -2,8 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useUser from "./useUser";
 import { getAccount } from "@/remote/account";
 
-
-export default function useAccout() {
+export default function useAccount() {
 
     const user = useUser();
 

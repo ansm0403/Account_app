@@ -6,14 +6,18 @@ import TextField from "../shared/TextField"
 import Select from "../shared/Select"
 import Spacing from "../shared/Spacing"
 import Button from "../shared/Button"
-import { getAccount, updateAccountBalance } from "@/remote/account"
+import { getTransferAccount, updateAccountBalance } from "@/remote/account"
 import { createTransaction } from "@/remote/transaction"
 import { Transaction } from "@/model/transaction"
+import useUser from "@/hook/useUser"
 
 export default function TransactionForm() {
 
+    const user = useUser();
+
     const [formValue, setFormValue] = useState({
-        userId : '',
+        userId : user?.id,
+        accountNumber : '',
         type : 'deposit',
         amount : '',
         displayText : '',
@@ -28,10 +32,10 @@ export default function TransactionForm() {
 
     const handleSubmit = async () => {
 
-        const account = await getAccount(formValue.userId);
+        const account = await getTransferAccount(formValue.accountNumber);
 
         if( account == null ) {
-            window.alert("해당 유저는 계좌를 보유하고 있지 않습니다.")
+            window.alert("해당 계좌가 존재하지 않습니다.")
             return;
         }
 
@@ -59,19 +63,19 @@ export default function TransactionForm() {
         
         await Promise.all([
             createTransaction(newTransaction), 
-            updateAccountBalance(formValue.userId, balance)
+            updateAccountBalance(formValue.accountNumber, balance)
         ]);
     
-        window.alert("입출금 데이터 생성 완료");
+        window.alert("입출금이 완료되었습니다.");
     }
 
     return (
         <div>
             <Flex direction="column" style = {{padding : "32px", maxWidth : "420px"}}>
                 <TextField 
-                    name = "userId" 
-                    label = "유저 아이디" 
-                    value = {formValue.userId} 
+                    name = "accountNumber" 
+                    label = "계좌 번호" 
+                    value = {formValue.accountNumber} 
                     onChange={handleFormValues} 
                 />
                 <Spacing size = {20} />
@@ -97,7 +101,7 @@ export default function TransactionForm() {
                 />
                 <Spacing size = {8} />
                 <TextField 
-                    label = "화면에 노출할 텍스트" 
+                    label = "메모" 
                     name = "displayText" 
                     value = {formValue.displayText}
                     onChange={handleFormValues}    

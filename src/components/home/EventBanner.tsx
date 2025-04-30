@@ -1,4 +1,5 @@
 'use client'
+
 import useEventBanner from './hooks/useEventBanner'
 import withSusepnse from '@/hook/withSuspense';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,15 +10,25 @@ import Skeleton from '../shared/Skeletion';
 import Image from "next/image"
 import { useState } from 'react';
 import Loading from '../shared/Loading';
+import useAccount from '@/hook/useAccount';
+import MyCard from './MyCard';
 
 function EventBanner() {
-  const { data } = useEventBanner()
+  const { data : eventBanner } = useEventBanner()
   const [ loading, setLoading ] = useState(false);
+
+  const { data : accounts } = useAccount();
+
+  const account = accounts?.[0];
+
+  if(account?.status === "READY") return null
+
+  if(account) return <MyCard account = {account}/>
 
   return (
     <div style={{padding : 24}}>
       <Swiper spaceBetween={8}>
-        {data?.map((banner)=>{
+        {eventBanner?.map((banner)=>{
           return (
           <SwiperSlide key = {banner.id}>
             <Link href = {banner.link}>
@@ -44,6 +55,50 @@ function EventBanner() {
     </div>
   )
 }
+
+// export async function getAccount(
+//   userId : string, 
+// ) : Promise<AccountSnapshot[] | null>
+// {
+
+//   const accountQuery = query(
+//       collection(store, COLLECTION.ACCOUNT),
+//       where("userId", "==", userId)
+//   )
+
+  // const snapshot = await getDocs(accountQuery);
+
+  // if(snapshot.empty) return null
+  // else{
+  //     return snapshot.docs.map((doc)=>{
+  //         return {
+  //             id : doc.id,
+  //             ...(doc.data() as Account),
+  //         }
+  //     })
+  // }
+  
+//   const result : AccountSnapshot[] = [];
+
+//   return new Promise<AccountSnapshot[] | null>((res)=>{
+//       onSnapshot(accountQuery, (snapshot) => {
+//           snapshot.docs.map((doc)=>{
+//               result.push({
+//                   id : doc.id,
+//                   ...(doc.data() as Account)
+//               })
+//           })
+//           // setData(result)
+//           res(result);
+//       })
+//   }).then((data)=>{
+//       if((data as AccountSnapshot[]).length === 0) return null;
+//       else {
+//           setData(data);
+//           return data;
+//       }
+//   })
+// }
 
 const bannerStyle = {
   borderRadius : "8px",
