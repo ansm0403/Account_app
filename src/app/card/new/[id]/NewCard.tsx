@@ -33,6 +33,7 @@ function NewCard({
 
     const navigate = useRouter();
     const user = useUser();
+    const today = new Date();
 
     const nextTerms = async (termIds : any) => {
         await setTerms({
@@ -43,6 +44,16 @@ function NewCard({
         })
         
         setStep(step + 1);
+    }
+
+    const validDate = (today : Date) : string => {
+        today.setFullYear(today.getFullYear() + 5);
+        today.setHours(today.getHours() + 9);
+
+        const year = today.getFullYear().toString().slice(-2);
+        const month = ("0" + today.getMonth()).slice(-2)
+
+        return `${month}/${year}`
     }
 
     return (
@@ -58,8 +69,9 @@ function NewCard({
                 ? <Form onNext = { async (formValues)=>{
                         const newCard = {
                             ...formValues,
-                            cardNumber: Date.now(),
+                            cardNumber: (Date.now() * 1000 + Math.floor(Math.random() * 999 + 1)).toString(),
                             status : 'READY',
+                            validThru : validDate(today),
                             userId : user?.id as string,
                             cardId
                         } as UserCard

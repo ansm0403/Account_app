@@ -1,7 +1,7 @@
 'use client'
 
 import withSuspense from '@/hook/withSuspense'
-import React from 'react'
+import React, { useState } from 'react'
 import useTransactions from './hooks/useTransactions'
 import Text from '../shared/Text';
 import Flex from '../shared/Flex';
@@ -12,18 +12,20 @@ import { Transaction } from '@/model/transaction';
 import Link from 'next/link';
 import Button from '../shared/Button';
 import Spacing from '../shared/Spacing';
+import Loading from '../shared/Loading';
 
 function Transactions() {
 
     const { data } = useTransactions();
+    const [loading, setLoading] = useState(false);
 
     const transactions = data?.pages
     .map(({items}) => items)
     .flat() as Transaction[]
 
     return (
-        <div>
-            <Text bold = {true} style = {{padding : 12}}>입출금 내역</Text>
+        <div style = {{paddingTop : 24}} >
+            <Text bold = {true} style = {{padding : 24}}>입출금 내역</Text>
             <Spacing size = {20}/>
             {
                 transactions?.length === 0 
@@ -33,9 +35,9 @@ function Transactions() {
                     </Flex>
                 )
                 : (
-                    <ul>
+                    <ul style = {{marginLeft : 18}} >
                         {
-                            transactions?.map((transaction)=>{
+                            transactions.slice(0, 5)?.map((transaction)=>{
                                 const isDeposit = transaction.type === 'deposit';
 
                                 return(
@@ -66,11 +68,14 @@ function Transactions() {
                 )
             }
              <Spacing size = {30}/>
-            <Link href = "/account/transaction">
+            <Link href = "/account/transaction" onClick={()=>{setLoading(true)}}>
                 <Button full = {true} size = "medium" weak={true}>
                     자세히 보기
                 </Button>
             </Link>
+            {
+                loading && <Loading />
+            }
         </div> 
     )
 }

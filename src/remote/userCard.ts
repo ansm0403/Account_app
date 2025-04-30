@@ -6,7 +6,7 @@ import { UserCard } from "@/model/card"
 export function createUserCard(
     newCard : UserCard
 ){
-    return setDoc(doc(collection(store, COLLECTION.USERCARD), newCard.cardId),
+    return setDoc(doc(collection(store, COLLECTION.USERCARD), newCard.cardNumber),
         newCard
     )
 }

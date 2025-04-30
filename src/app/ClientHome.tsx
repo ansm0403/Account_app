@@ -5,8 +5,6 @@ import React from 'react'
 export default function ClientHome() {
     const {data} = useSession();
 
-    console.log("session : ", data);
-  
     return (
         <div>
             

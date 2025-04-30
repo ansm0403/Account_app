@@ -12,8 +12,9 @@ export interface Card {
 
 export interface UserCard {
     cardName : string,
-    cardNumber : number,
+    cardNumber : string,
     email : string,
+    validThru : string,
     name : string,
     phone : string,
     status : "READY" | "DONE",

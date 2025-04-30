@@ -8,8 +8,6 @@ let initialStep = 0;
 
 export default async function NewCardPage({params : { id }} : {params : {id : string}}) {
 
-    console.log("id : ", id);
-
     const agreedTerms = await getTerms(id);
 
     if(agreedTerms == null) {

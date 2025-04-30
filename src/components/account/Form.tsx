@@ -77,7 +77,6 @@ export default function Form({onNext, type} : Props) {
                     )
                 }
             </form>
-
             <FixedBottomButton label = "개설하기" onClick = {handleSubmit(onNext)} />
         </div>
     )

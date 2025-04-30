@@ -54,10 +54,11 @@ function Navbar() {
             <div style = {homeNavbarStyles}>
                 <Link 
                     href = "/" 
+                    style = {{fontStyle : "italic"}}
                     onClick={() => {
                         if(pathname !== '/') setLoading(true)
                     }}
-                >My Accounts</Link>
+                >My Banking</Link>
             </div>
             {renderButton()}
             { loading && <Loading /> }

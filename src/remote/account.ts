@@ -1,8 +1,11 @@
 import { COLLECTION } from "@/constant/collection";
-import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, updateDoc, where, query, onSnapshot } from "firebase/firestore";
 import { store } from "./firebase";
 import { Account } from "@/model/account";
 
+export interface AccountSnapshot extends Account{
+    id : string
+}
 
 export function setTerms({
     userId, cardId, termIds, type
@@ -10,7 +13,6 @@ export function setTerms({
     userId? : string; cardId? : string, termIds : string[], type : string
 }){
     if(type === "card"){
-        console.log("CARD Terms 등록 함 ㅋㅋ")
         return setDoc(doc(collection(store, COLLECTION.TERMS), cardId), {
             userId,
             cardId,
@@ -42,14 +44,53 @@ export function createAccount(newAccount : Account){
     return setDoc(
                 doc(
                     collection(store, COLLECTION.ACCOUNT), 
-                    newAccount.userId
+                    newAccount.accountNumber
                 ), 
             newAccount,
         )
 }
 
-export async function getAccount(userId : string){
-    const snapshot = await getDoc(doc(collection(store, COLLECTION.ACCOUNT), userId))
+export async function getAccount(
+    userId : string,
+) : Promise<AccountSnapshot[] | null>
+{
+    const accountQuery = query(
+        collection(store, COLLECTION.ACCOUNT),
+        where("userId", "==", userId)
+    )
+    
+    // const snapshot = await getDocs(accountQuery);
+
+    // if(snapshot.empty) return null
+    // else{
+    //     return snapshot.docs.map((doc)=>{
+    //         return {
+    //             id : doc.id,
+    //             ...(doc.data() as Account),
+    //         }
+    //     })
+    // }
+    
+    return new Promise<AccountSnapshot[] | null>((res)=>{
+        onSnapshot(accountQuery, (snapshot) => {
+            const account = snapshot.docs.map((doc)=>({
+                    id : doc.id,
+                    ...(doc.data() as Account)
+                })
+            )
+            res(account);
+        })
+    }).then((data)=>{
+        if((data as AccountSnapshot[]).length === 0) return null;
+        else {
+            return data;
+        }
+    })
+}
+
+export async function getTransferAccount(accountNumber : string){
+
+    const snapshot = await getDoc(doc(collection(store, COLLECTION.ACCOUNT), accountNumber))
 
     if (snapshot.exists() === false){
         return null;
@@ -61,8 +102,8 @@ export async function getAccount(userId : string){
     }
 }
 
-export function updateAccountBalance(userId: string, balance : number){
-    const snapshot = doc(collection(store, COLLECTION.ACCOUNT), userId)
+export function updateAccountBalance(accountNumber: string, balance : number){
+    const snapshot = doc(collection(store, COLLECTION.ACCOUNT), accountNumber)
 
     return updateDoc(snapshot, { balance })
 }
