@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import CreditScoreChart from '../shared/CreditScoreGraph'
 import Flex from '@shared/Flex'
-import Text from '@shared/Text'
 import Button from '@shared/Button'
 import Spacing from '@shared/Spacing'
 import Skeleton from '../shared/Skeletion'
