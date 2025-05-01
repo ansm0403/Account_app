@@ -15,9 +15,14 @@ export interface UserCard {
     cardNumber : string,
     email : string,
     validThru : string,
+    type : "체크카드" | "신용카드",
     name : string,
     phone : string,
     status : "READY" | "DONE",
     userId : string,
     cardId : string
+}
+
+export interface CheckCard extends UserCard {
+    balance : number
 }

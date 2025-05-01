@@ -1,5 +1,5 @@
 import { COLLECTION } from "@/constant/collection";
-import { collection, doc, getDoc, setDoc, updateDoc, where, query, onSnapshot } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { store } from "./firebase";
 import { Account } from "@/model/account";
 
@@ -27,6 +27,8 @@ export function setTerms({
     })
 }
 
+export function getAccount(){};
+
 export async function getTerms(id : string){
     const snapshot = await getDoc(doc(collection(store, COLLECTION.TERMS), id))
 
@@ -50,43 +52,6 @@ export function createAccount(newAccount : Account){
         )
 }
 
-export async function getAccount(
-    userId : string,
-) : Promise<AccountSnapshot[] | null>
-{
-    const accountQuery = query(
-        collection(store, COLLECTION.ACCOUNT),
-        where("userId", "==", userId)
-    )
-    
-    // const snapshot = await getDocs(accountQuery);
-
-    // if(snapshot.empty) return null
-    // else{
-    //     return snapshot.docs.map((doc)=>{
-    //         return {
-    //             id : doc.id,
-    //             ...(doc.data() as Account),
-    //         }
-    //     })
-    // }
-    
-    return new Promise<AccountSnapshot[] | null>((res)=>{
-        onSnapshot(accountQuery, (snapshot) => {
-            const account = snapshot.docs.map((doc)=>({
-                    id : doc.id,
-                    ...(doc.data() as Account)
-                })
-            )
-            res(account);
-        })
-    }).then((data)=>{
-        if((data as AccountSnapshot[]).length === 0) return null;
-        else {
-            return data;
-        }
-    })
-}
 
 export async function getTransferAccount(accountNumber : string){
 

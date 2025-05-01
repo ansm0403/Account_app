@@ -12,6 +12,8 @@ import FullPageLoader from '../shared/FullPageLoader';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import useAccount from '@/hook/useAccount';
+import { createUserCard } from '@/remote/userCard';
+import { UserCard } from '@/model/card';
 
 
 const FixedBottomButton = dynamic(()=>import('../shared/FixedBottomButton')) 
@@ -58,24 +60,40 @@ function NewAccount({initialStep} : {initialStep : number}) {
             {
                 step === 1
                 ? <Form onNext = { async (formValues)=>{
+                        const cardNumber = (Date.now() * 1000 + Math.floor(Math.random() * 999 + 1)).toString();
+                        const validThru = validDate(today);
+
                         const newAccount = {
                             ...formValues,
                             accountNumber: Date.now().toString(),
-                            cardNumber : (Date.now() * 1000 + Math.floor(Math.random() * 999 + 1)).toString(), 
+                            cardNumber, 
                             balance : 0,
-                            validThru : validDate(today),
+                            validThru,
                             status : 'READY',
                             userId : user?.id as string,
                         } as Account
+
+                        const newCard = {
+                            ...formValues,
+                            cardNumber,
+                            cardName : formValues.accountName,
+                            status : 'READY',
+                            validThru,
+                            type : "체크카드", 
+                            userId : user?.id as string,
+                            cardId : (Date.now() * 10 + Math.floor(Math.random() * 999 + 1)).toString()
+                        } as UserCard
                         
+                        console.log("formData : ", formValues);
                         await createAccount(newAccount)
-    
+                        await createUserCard(newCard)
+
                         setStep(step + 1);
                         
-                        setTimeout(async ()=>{
+                        setTimeout(async () => {
                             await createAccount({ ...newAccount, status : 'DONE' })
                             refetch();
-                        }, 10000)
+                        }, 7000)
                     }}
                 />
                 : null

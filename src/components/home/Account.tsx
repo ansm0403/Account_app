@@ -13,43 +13,37 @@ import { colors } from "@/styles/colorPalette"
 import { keyframes } from "@emotion/react"
 import Loading from "../shared/Loading"
 
+
 function Account(){
     
     const { data : accounts } = useAccount();
-
-    // const [account, setaccount] = useState<AccountSnapshot[] | null>(null)
+    // const [accounts, setaccount] = useState<AccountSnapshot[] | null>(null)
+    // const user = useUser();
 
     // useEffect(()=>{
     
-    //     // const accountQuery = query(
-    //     //       collection(store, COLLECTION.ACCOUNT),
-    //     //       where("userId", "==", user?.id)
-    //     // )
+    //     const accountQuery = query(
+    //           collection(store, COLLECTION.ACCOUNT),
+    //           where("userId", "==", user?.id)
+    //     )
     
-    //     // const unsubscribe = onSnapshot(accountQuery, (snapshot) => {
-    //     //     if(snapshot.empty) return;
-    //     //     const account = snapshot.docs.map((doc)=>({
-    //     //           id : doc.id,
-    //     //           ...(doc.account() as AccountType)
-    //     //       })
-    //     //     )
-    //     //     console.log("snapshot : ", account);
-    //     //     setaccount(account as AccountSnapshot[]);
-    //     // })
+    //     const unsubscribe = onSnapshot(accountQuery, (snapshot) => {
+    //         if(snapshot.empty) return;
+    //         const account = snapshot.docs.map((doc)=>({
+    //               id : doc.id,
+    //               ...(doc.data() as Account)
+    //           })
+    //         )
+    //         console.log("snapshot : ", account);
+    //         setaccount(account as AccountSnapshot[]);
+    //     })
     
-    //     async function fetchaccount(){
-    //         const account = await getAccount(user?.id as string, setaccount);
-    //         setaccount(account);
-    //     }
-    //     fetchaccount();
-    
-    //     // return () => unsubscribe();
+    //     return () => unsubscribe();
         
     // },[])
 
     const [ loading, setLoading ] = useState(false);
 
-    console.log("accounts : ", accounts);
 
     if(accounts == null){
         return (
@@ -77,8 +71,6 @@ function Account(){
             </div>
         )
     }
-
-    console.log("어카운트 데이터 : ", accounts[0]);
 
     const account = accounts[0];
 

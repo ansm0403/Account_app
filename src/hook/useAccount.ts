@@ -1,14 +1,44 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, UseQueryResult } from "@tanstack/react-query";
 import useUser from "./useUser";
-import { getAccount } from "@/remote/account";
+import { Account } from "@/model/account";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { store } from "@/remote/firebase";
+import { COLLECTION } from "@/constant/collection";
+import { AccountSnapshot } from "@/remote/account";
 
-export default function useAccount() {
+export default function useAccount() : UseQueryResult<AccountSnapshot[] | null>{
 
     const user = useUser();
+    const queryClient = useQueryClient();
+    const queryKey = ["account", user?.id];
+
+    const accountQuery = query(
+        collection(store, COLLECTION.ACCOUNT),
+        where("userId", "==", user?.id)
+    )
 
     return useQuery({
-        queryKey : ["account", user?.id],
-        queryFn : () => getAccount(user?.id as string),
-        enabled : user != null,
-    }) 
+        queryKey,
+        queryFn : () => {
+            return new Promise((res) => {
+                const unsubscribe = onSnapshot(accountQuery, (snapshot) => {
+                    const accounts = snapshot.empty 
+                    ? null 
+                    : snapshot.docs.map((doc)=>({
+                        id : doc.id,
+                        ...doc.data() as Account,
+                    })) 
+                    res(accounts);
+                    queryClient.setQueryData(queryKey, accounts);
+                })
+                return () => unsubscribe();
+            }
+        )},
+        refetchOnMount : false, 
+        refetchOnWindowFocus : false,
+        refetchOnReconnect : false,
+        staleTime : Infinity,
+        enabled : user != null
+    })
 }
+
