@@ -73,6 +73,7 @@ function NewCard({
                             status : 'READY',
                             validThru : validDate(today),
                             userId : user?.id as string,
+                            type : "신용카드",
                             cardId
                         } as UserCard
                         

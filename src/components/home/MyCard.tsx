@@ -1,8 +1,12 @@
+import useMyCards from '@/hook/useMyCards'
 import { Account } from '@/model/account'
+import { CheckCard } from '@/model/card'
 import { colors } from '@/styles/colorPalette'
 import styled from '@emotion/styled'
 import React from 'react'
-
+import 'swiper/css'
+import SwiperNavigation from '../shared/SwiperNavigation'
+import { SwiperSlide } from 'swiper/react'
 
 export default function MyCard({
     account
@@ -11,25 +15,50 @@ export default function MyCard({
 }) {
 
     const { name, cardNumber, accountName, balance, validThru } = account
+    const checkCard = { name, cardNumber, cardName : accountName, balance, validThru, type : "체크카드" }
+    const { data } = useMyCards();
+    const myCards = data ? [checkCard, ...data] : [checkCard];
+
+    console.log("데이터 : ", data);
+
+    console.log("cards : ", myCards);
+
+    if(!myCards) return null;
 
     return (
-        <Container>      
-                <div style={{fontSize : "0.7rem", display : "flex", justifyContent : "space-between"}}>
-                    <div>{name}</div>
-                    <div>{accountName}</div>
-                </div>
-                <div style = {{marginBottom : "4rem"}}>
-                    {convertCardNumber(cardNumber)}  
-                </div>
-                <div style = {{fontSize : "0.7rem", display : "flex", justifyContent : "space-between"}}>
-                    <div>잔액</div>
-                    <div>VALID THRU</div>
-                </div>
-                <div style={{ display : "flex", justifyContent : "space-between"}}>
-                    <div>{balance}</div>
-                    <div>{validThru}</div>
-                </div>
-        </Container>
+        <SwiperNavigation>
+            {myCards.map((card, idx) => {
+                return(
+                    <SwiperSlide key = {idx}>
+                        <Container>     
+                            <div style={{fontSize : "0.7rem", display : "flex", justifyContent : "space-between"}}>
+                                <div>{card.name}</div>
+                                <div>{card.cardName}</div>
+                            </div>
+                            <div style = {{marginBottom : "4rem"}}>
+                                {convertCardNumber(cardNumber)}  
+                            </div>
+                            <div style = {{fontSize : "0.7rem", display : "flex", justifyContent : "space-between"}}>
+                                {
+                                    card.type === "체크카드" && (
+                                        <div>잔액</div>
+                                    )
+                                }
+                                <div>VALID THRU</div>
+                            </div>
+                            <div style={{ display : "flex", justifyContent : "space-between"}}>
+                                {
+                                    card.type === "체크카드" && (
+                                        <div>{(card as CheckCard).balance}</div>
+                                    )
+                                }
+                                <div>{validThru}</div>
+                            </div>
+                        </Container>
+                    </SwiperSlide>    
+                )
+            })}
+        </SwiperNavigation>
     )
 }
 

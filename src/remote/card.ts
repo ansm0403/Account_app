@@ -1,7 +1,7 @@
 import { COLLECTION } from "@/constant/collection";
 import { collection, doc, getDoc, getDocs, limit, query,  QuerySnapshot, startAfter, where } from "firebase/firestore";
 import { store } from "./firebase";
-import { Card } from "@/model/card";
+import { Card, UserCard } from "@/model/card";
 
 export async function getCards(pageParam? : QuerySnapshot<Card>){
     const cardQuery = pageParam == null 
@@ -41,4 +41,18 @@ export async function getCard(id : string){
         id : cardSnapshot.id,
         ...(cardSnapshot.data() as Card)
     }
+}
+
+export async function getMyCards(userId : string){
+    const cardsQuery = query(
+        collection(store, COLLECTION.USERCARD),
+        where("userId", "==", userId),
+        where("type", "==", "신용카드")
+    )
+    const snapshot = await getDocs(cardsQuery);
+
+    return snapshot.docs.map((doc)=>({
+        id : doc.id,
+        ...(doc.data() as UserCard)
+    }))
 }
