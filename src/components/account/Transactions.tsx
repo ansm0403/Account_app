@@ -23,26 +23,29 @@ function Transactions() {
     .map(({items}) => items)
     .flat() as Transaction[]
 
+
+    console.log("트랜잭션 : ", transactions);
+
     return (
         <div style = {{paddingTop : 24}} >
-            <Text bold = {true} style = {{padding : 24}}>입출금 내역</Text>
+            <Text bold = {true} style = {{padding : 24}}>거래 내역</Text>
             <Spacing size = {20}/>
             {
                 transactions?.length === 0 
                 ? (
                     <Flex style = {{padding : 24}}>
-                        <Text>아직 입출금 내역이 없어요.</Text>
+                        <Text>아직 거래 내역이 없어요.</Text>
                     </Flex>
                 )
                 : (
                     <ul style = {{marginLeft : 18}} >
                         {
                             transactions.slice(0, 5)?.map((transaction)=>{
-                                const isDeposit = transaction.type === 'deposit';
+                                const isDeposit = transaction.type === '입금' || transaction.type === '수취';
 
                                 return(
                                     <ListRow 
-                                        key = {transaction.userId}
+                                        key = {transaction.date}
                                         contents = {
                                             <ListRow.Texts 
                                                 title = {transaction.displayText} 
@@ -80,6 +83,12 @@ function Transactions() {
     )
 }
 
+
 export default withSuspense(Transactions, {
-    fallback : <div>로딩 중 입니다...</div>
+    fallback : <div style = {{
+        textAlign : "center", 
+        padding : "1rem", 
+        fontWeight : "bold", 
+        marginTop : "1rem"
+    }}>로딩 중 입니다...</div>
 })

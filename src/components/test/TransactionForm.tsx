@@ -6,19 +6,35 @@ import TextField from "../shared/TextField"
 import Select from "../shared/Select"
 import Spacing from "../shared/Spacing"
 import Button from "../shared/Button"
-import { getTransferAccount, updateAccountBalance } from "@/remote/account"
+import { AccountSnapshot, getTransferAccount, updateAccountBalance } from "@/remote/account"
 import { createTransaction } from "@/remote/transaction"
-import { Transaction } from "@/model/transaction"
-import useUser from "@/hook/useUser"
+import { Transaction, TransactionType } from "@/model/transaction"
+import { collection, doc } from "firebase/firestore"
+import { store } from "@/remote/firebase"
+import { COLLECTION } from "@/constant/collection"
 
-export default function TransactionForm() {
+interface TransactionProps {
+    type : "transfer" | "deposit-withdraw",
+    accounts : AccountSnapshot[]
+}
 
-    const user = useUser();
+interface FormValueType {
+    accountNumber : string
+    type : '입금' | '출금' | '송금' | '수취'
+    amount : string,
+    displayText : string
+}
 
-    const [formValue, setFormValue] = useState({
-        userId : user?.id,
+export default function TransactionForm({
+    type,
+    accounts
+} : TransactionProps) {
+
+    const myAccount = accounts?.[0];
+
+    const [formValue, setFormValue] = useState<FormValueType>({
         accountNumber : '',
-        type : 'deposit',
+        type : '입금',
         amount : '',
         displayText : '',
     })
@@ -32,66 +48,163 @@ export default function TransactionForm() {
 
     const handleSubmit = async () => {
 
-        const account = await getTransferAccount(formValue.accountNumber);
+        let TO, FROM;
+        let fromAccountBalance, toAccountBalance;
 
-        if( account == null ) {
-            window.alert("해당 계좌가 존재하지 않습니다.")
-            return;
-        }
+        const toAccountNumber = type === 'deposit-withdraw' 
+            ? myAccount?.accountNumber as string 
+            : formValue.accountNumber;
 
-        if(
-            formValue.type === "withdraw" &&
-            account.balance - Number(formValue.amount) < 0
-        ) {
-            window.alert(`지금 사용자의 잔액은 ${account.balance}원 입니다. 다시 시도해주세요.`)
-        
-            return;
-        }
+        const fromAccountNumber = myAccount?.accountNumber as string
 
-        const balance = 
-            formValue.type === "withdraw" 
-            ?  account.balance - Number(formValue.amount)
-            :  account.balance + Number(formValue.amount)
-
-        const newTransaction = {
-            ...formValue,
-            amount : Number(formValue.amount),
-            date : new Date().toISOString(),
-            balance,
-        } as Transaction
-
-        
-        await Promise.all([
-            createTransaction(newTransaction), 
-            updateAccountBalance(formValue.accountNumber, balance)
-        ]);
+        const transactionType = type === 'deposit-withdraw'
+            ? formValue.type
+            : '송금'
     
+        const fromAccount = myAccount;
+
+        if ((transactionType === "출금" || transactionType === "송금")){
+            if(fromAccount.balance - Number(formValue.amount) < 0){
+                window.alert(`지금 사용자의 잔액은 ${fromAccount.balance}원 입니다. 다시 시도해주세요.`)
+
+                return;
+            }
+            fromAccountBalance = fromAccount.balance - Number(formValue.amount);
+        } else {
+            fromAccountBalance = fromAccount.balance + Number(formValue.amount);
+        }
+
+        
+        // if(
+        //     (transactionType === "출금" || transactionType === "송금") &&
+        //     fromAccount.balance - Number(formValue.amount) < 0
+        // ) {
+        //     window.alert(`지금 사용자의 잔액은 ${fromAccount.balance}원 입니다. 다시 시도해주세요.`)
+        
+        //     return;
+        // }
+
+        // const fromAccountBalance = 
+        //    (transactionType === "출금" || transactionType === "송금")
+        //     ?  fromAccount.balance - Number(formValue.amount)
+        //     :  fromAccount.balance + Number(formValue.amount)
+
+  
+        if(type === 'transfer'){
+            const toAccount = await getTransferAccount(toAccountNumber);
+
+            if( toAccount == null ) {
+                window.alert("해당 계좌가 존재하지 않습니다.")
+                return;
+            }
+
+            // toAccountBalance = formValue.type === "송금" 
+            //     ?  toAccount.balance + Number(formValue.amount)
+            //     :  toAccount.balance - Number(formValue.amount)
+
+            toAccountBalance = toAccount.balance + Number(formValue.amount);
+
+            const toAccountTransaction = {
+                ...formValue,
+                user : doc(collection(store, COLLECTION.USER), toAccount.userId),
+                transactionTarget : doc(collection(store, COLLECTION.USER), fromAccount.userId),
+                type : '수취' as TransactionType,
+                amount : Number(formValue.amount),
+                date : new Date().toISOString(),
+                balance : toAccountBalance, 
+            }
+
+            TO = {
+                account : toAccount,
+                transaction : toAccountTransaction
+            }
+
+            const fromAccountTransaction = {
+                ...formValue,
+                user : doc(collection(store, COLLECTION.USER), fromAccount.userId),
+                transactionTarget : doc(collection(store, COLLECTION.USER), toAccount.userId),
+                type : transactionType,
+                amount : Number(formValue.amount),
+                date : new Date().toISOString(),
+                balance : fromAccountBalance,
+            } as Transaction
+    
+            FROM = {
+                account : fromAccount,
+                transaction : fromAccountTransaction
+            }
+
+            // await Promise.all([
+            //     createTransaction(toAccountTransaction), 
+            //     createTransaction(fromAccountTransaction), 
+            //     updateAccountBalance(toAccountNumber, toAccountBalance),
+            //     updateAccountBalance(fromAccountNumber, fromAccountBalance)
+            // ]);
+            await createTransaction({to : TO, from : FROM});
+      
+        } else {
+            // await Promise.all([
+            //     createTransaction(fromAccountTransaction), 
+            //     updateAccountBalance(fromAccountNumber, fromAccountBalance)
+            // ]);
+            
+            const fromAccountTransaction = {
+                ...formValue,
+                user : doc(collection(store, COLLECTION.USER), fromAccount.userId),
+                transactionTarget : doc(collection(store, COLLECTION.USER), fromAccount.userId),
+                type : transactionType,
+                amount : Number(formValue.amount),
+                date : new Date().toISOString(),
+                balance : fromAccountBalance,
+            } as Transaction
+    
+            FROM = {
+                account : fromAccount,
+                transaction : fromAccountTransaction
+            }
+
+            await createTransaction({from : FROM});
+        }
+
+  
         window.alert("입출금이 완료되었습니다.");
     }
 
     return (
         <div>
             <Flex direction="column" style = {{padding : "32px", maxWidth : "420px"}}>
-                <TextField 
-                    name = "accountNumber" 
-                    label = "계좌 번호" 
-                    value = {formValue.accountNumber} 
-                    onChange={handleFormValues} 
-                />
+                {
+                    type === "deposit-withdraw" 
+                    ? null
+                    : (
+                        <TextField 
+                            name = "accountNumber" 
+                            label = "계좌 번호" 
+                            value = {formValue.accountNumber} 
+                            onChange={handleFormValues} 
+                        />
+                    )
+                }
                 <Spacing size = {20} />
-                <Select 
-                    name = "type" 
-                    value = {formValue.type}
-                    options = {[
-                        {
-                            label : "입금", value : "deposit",
-                        },
-                        {
-                            label : "출금", value : "withdraw",
-                        }
-                    ]} 
-                    onChange={handleFormValues}
-                />
+                {
+                    type === "transfer"
+                    ? null
+                    : (
+                        <Select 
+                            name = "type" 
+                            value = {formValue.type}
+                            options = {[
+                                {
+                                    label : "입금", value : "입금",
+                                },
+                                {
+                                    label : "출금", value : "출금",
+                                }
+                            ]} 
+                            onChange={handleFormValues}
+                        />
+                    )
+                }
                 <Spacing size = {8} />
                 <TextField 
                     label = "입출금 금액" 
@@ -108,7 +221,11 @@ export default function TransactionForm() {
                 />
                 <Spacing size = {30} />
                 <Button onClick={handleSubmit}>
-                    {formValue.type === 'deposit' ? "입금" : "출금"}
+                    {
+                        type === "transfer" ? "송금" : (
+                            type === "deposit-withdraw" && formValue.type === '입금' ? "입금" : "출금"
+                        )
+                    }
                 </Button>
             </Flex>
         </div>

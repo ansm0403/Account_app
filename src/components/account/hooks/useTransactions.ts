@@ -9,7 +9,9 @@ export default function useTransactions({filter} : {filter? : TransactionFilterT
 
     return useSuspenseInfiniteQuery({
         queryKey : ['transaction', user?.id, filter],
-        queryFn : ({pageParam}) => getTransactions({ pageParam, userId : user?.id as string, filter}),
+        queryFn : ({pageParam}) => {
+            return getTransactions({ pageParam, userId : user?.id as string, filter})
+        },
         getNextPageParam : ({lastVisible}) => {
             return lastVisible;                            
         },

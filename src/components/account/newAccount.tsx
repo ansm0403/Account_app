@@ -84,7 +84,6 @@ function NewAccount({initialStep} : {initialStep : number}) {
                             cardId : (Date.now() * 10 + Math.floor(Math.random() * 999 + 1)).toString()
                         } as UserCard
                         
-                        console.log("formData : ", formValues);
                         await createAccount(newAccount)
                         await createUserCard(newCard)
 

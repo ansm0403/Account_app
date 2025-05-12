@@ -6,6 +6,7 @@ import { colors } from '@/styles/colorPalette'
 import { FaRegCreditCard } from "react-icons/fa";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
 import { BsGraphUpArrow } from "react-icons/bs";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
 import Link from 'next/link';
 import Loading from '../shared/Loading';
 
@@ -15,6 +16,14 @@ export default function MenuBar() {
   
   return (
     <Container>
+      <Link href = "/transfer" onClick = {()=>{setLoading(true)}}>
+        <Menu>
+          <MenuButton>
+            <FaMoneyBillTransfer />
+          </MenuButton>
+          <MenuTitle>이체</MenuTitle>
+        </Menu>
+      </Link>
       <Link href = "/account" onClick = {()=>{setLoading(true)}}>
         <Menu>
           <MenuButton>
@@ -23,12 +32,12 @@ export default function MenuBar() {
           <MenuTitle>분석</MenuTitle>
         </Menu>
       </Link>
-      <Link href = "/transfer" onClick = {()=>{setLoading(true)}}>
+      <Link href = "/deposit-withdraw" onClick = {()=>{setLoading(true)}}>
         <Menu>
           <MenuButton>
             <RiMoneyDollarBoxFill />
           </MenuButton>
-          <MenuTitle>이체</MenuTitle>
+          <MenuTitle>입출금</MenuTitle>
         </Menu>
       </Link>
       <Link href="/card" onClick = {()=>{setLoading(true)}}>

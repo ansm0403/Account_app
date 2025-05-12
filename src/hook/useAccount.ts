@@ -12,15 +12,15 @@ export default function useAccount() : UseQueryResult<AccountSnapshot[] | null>{
     const queryClient = useQueryClient();
     const queryKey = ["account", user?.id];
 
-    const accountQuery = query(
-        collection(store, COLLECTION.ACCOUNT),
-        where("userId", "==", user?.id)
-    )
-
     return useQuery({
         queryKey,
         queryFn : () => {
             return new Promise((res) => {
+                const accountQuery = query(
+                    collection(store, COLLECTION.ACCOUNT),
+                    where("userId", "==", user?.id)
+                )
+
                 const unsubscribe = onSnapshot(accountQuery, (snapshot) => {
                     const accounts = snapshot.empty 
                     ? null 

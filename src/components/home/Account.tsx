@@ -12,11 +12,16 @@ import styled from "@emotion/styled"
 import { colors } from "@/styles/colorPalette"
 import { keyframes } from "@emotion/react"
 import Loading from "../shared/Loading"
+import { useSetRecoilState } from "recoil"
+import { accountState } from "@/atom/account"
 
 
 function Account(){
     
     const { data : accounts } = useAccount();
+    const setAccount = useSetRecoilState(accountState);
+    setAccount(accounts);
+    
     // const [accounts, setaccount] = useState<AccountSnapshot[] | null>(null)
     // const user = useUser();
 

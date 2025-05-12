@@ -13,6 +13,7 @@ import Text from '@/components/shared/Text'
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import Loading from '@/components/shared/Loading';
+import withAuth from '@/hook/withAuth';
 
 const FixedBottomButton = dynamic(()=> import('@/components/shared/FixedBottomButton'),{
     ssr : false,
@@ -22,7 +23,7 @@ interface Props {
     cardId : string
 }
 
-export default function DetailCard({cardId} : Props) {
+function DetailCard({cardId} : Props) {
     
     const { data : detailCard } = useQuery({
         queryKey : ['detail-card', cardId],
@@ -92,3 +93,5 @@ export default function DetailCard({cardId} : Props) {
 function removeHTMLTags(text : string) {
     return text.replace(/<\/?[^>]+(>|$)/g, '')
 }
+
+export default withAuth(DetailCard);

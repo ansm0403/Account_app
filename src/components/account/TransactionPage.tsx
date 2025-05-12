@@ -20,11 +20,19 @@ const FILTER :
     },
     {
         label : '입금',
-        value : 'deposit'
+        value : '입금'
     },
     {
         label : '출금',
-        value : 'withdraw'
+        value : '출금'
+    },
+    {
+        label : '송금',
+        value : '송금'
+    },
+    {
+        label : '수취',
+        value : '수취'
     }
 ]
 
@@ -49,7 +57,7 @@ function TransactionPage() {
         <div>
             <Flex as = 'ul' justify='flex-end' style = {{padding : 24}}>
                 {FILTER.map((filter)=>(
-                    <li key = {filter.value} onClick={()=>setCurrentFilter(filter.value)}>
+                    <li style = {{padding : "0 5px"}} key = {filter.value} onClick={()=>setCurrentFilter(filter.value)}>
                         {filter.label}
                     </li>
                 ))}
@@ -63,11 +71,11 @@ function TransactionPage() {
                 <ul>
                     {
                         transactions?.map((transaction)=>{
-                            const isDeposit = transaction.type === 'deposit';
+                            const isDeposit = transaction.type === '입금' || transaction.type === '수취';
 
                             return(
                                 <ListRow 
-                                    key = {transaction.userId}
+                                    key = {transaction.date}
                                     contents = {
                                         <ListRow.Texts 
                                             title = {
