@@ -1,4 +1,4 @@
-import { DocumentData, DocumentReference, Transaction } from "firebase/firestore"
+import { DocumentData, DocumentReference } from "firebase/firestore"
 
 export interface User {
     id : string

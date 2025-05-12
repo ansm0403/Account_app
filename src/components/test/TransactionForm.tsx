@@ -6,7 +6,7 @@ import TextField from "../shared/TextField"
 import Select from "../shared/Select"
 import Spacing from "../shared/Spacing"
 import Button from "../shared/Button"
-import { AccountSnapshot, getTransferAccount, updateAccountBalance } from "@/remote/account"
+import { AccountSnapshot, getTransferAccount } from "@/remote/account"
 import { createTransaction } from "@/remote/transaction"
 import { Transaction, TransactionType } from "@/model/transaction"
 import { collection, doc } from "firebase/firestore"
@@ -55,8 +55,6 @@ export default function TransactionForm({
             ? myAccount?.accountNumber as string 
             : formValue.accountNumber;
 
-        const fromAccountNumber = myAccount?.accountNumber as string
-
         const transactionType = type === 'deposit-withdraw'
             ? formValue.type
             : '송금'
@@ -73,22 +71,6 @@ export default function TransactionForm({
         } else {
             fromAccountBalance = fromAccount.balance + Number(formValue.amount);
         }
-
-        
-        // if(
-        //     (transactionType === "출금" || transactionType === "송금") &&
-        //     fromAccount.balance - Number(formValue.amount) < 0
-        // ) {
-        //     window.alert(`지금 사용자의 잔액은 ${fromAccount.balance}원 입니다. 다시 시도해주세요.`)
-        
-        //     return;
-        // }
-
-        // const fromAccountBalance = 
-        //    (transactionType === "출금" || transactionType === "송금")
-        //     ?  fromAccount.balance - Number(formValue.amount)
-        //     :  fromAccount.balance + Number(formValue.amount)
-
   
         if(type === 'transfer'){
             const toAccount = await getTransferAccount(toAccountNumber);
@@ -97,10 +79,6 @@ export default function TransactionForm({
                 window.alert("해당 계좌가 존재하지 않습니다.")
                 return;
             }
-
-            // toAccountBalance = formValue.type === "송금" 
-            //     ?  toAccount.balance + Number(formValue.amount)
-            //     :  toAccount.balance - Number(formValue.amount)
 
             toAccountBalance = toAccount.balance + Number(formValue.amount);
 
@@ -134,20 +112,10 @@ export default function TransactionForm({
                 transaction : fromAccountTransaction
             }
 
-            // await Promise.all([
-            //     createTransaction(toAccountTransaction), 
-            //     createTransaction(fromAccountTransaction), 
-            //     updateAccountBalance(toAccountNumber, toAccountBalance),
-            //     updateAccountBalance(fromAccountNumber, fromAccountBalance)
-            // ]);
             await createTransaction({to : TO, from : FROM});
       
         } else {
-            // await Promise.all([
-            //     createTransaction(fromAccountTransaction), 
-            //     updateAccountBalance(fromAccountNumber, fromAccountBalance)
-            // ]);
-            
+     
             const fromAccountTransaction = {
                 ...formValue,
                 user : doc(collection(store, COLLECTION.USER), fromAccount.userId),

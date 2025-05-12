@@ -1,7 +1,6 @@
 import { getCard } from "@/remote/card";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import DetailCard from "./CardDetail";
-import withAuth from "@/hook/withAuth";
 
 type Props = {
     params : {id : string}
