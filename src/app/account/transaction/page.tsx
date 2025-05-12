@@ -10,6 +10,8 @@ export default async function TransactionMainPage() {
 
     const session = await getServerSession(authOptions);
 
+    if(session?.user == null ) return <></>
+
     if(session != null && session.user != null) {
         const client = new QueryClient();
 
@@ -27,6 +29,4 @@ export default async function TransactionMainPage() {
             </HydrationBoundary>
         )
     }
-
-    return <></>
 }

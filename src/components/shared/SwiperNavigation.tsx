@@ -20,7 +20,7 @@ export default function SwiperNavigation({
 
     const [ isFirst, setIsFirst ] = useState<boolean>(true);
     const [ isEnd, setIsEnd ] = useState<boolean>(false);
-
+    
     return (
         <SwiperContainer isFirst = {isFirst} isEnd = {isEnd}>
             <Swiper
@@ -37,10 +37,10 @@ export default function SwiperNavigation({
                 }}
             >
                 {children}
-                <button  className = 'swiper-button-prev'>
+                <button className = 'swiper-button-prev'>
                     <ArrowBack />
                 </button>
-                <button  className = 'swiper-button-next'>
+                <button className = 'swiper-button-next'>
                     <ArrowNext />
                 </button>
             </Swiper>

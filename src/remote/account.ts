@@ -67,7 +67,7 @@ export async function getTransferAccount(accountNumber : string){
     }
 }
 
-export function updateAccountBalance(accountNumber: string, balance : number){
+export function updateAccountBalance(accountNumber : string, balance : number){
     const snapshot = doc(collection(store, COLLECTION.ACCOUNT), accountNumber)
 
     return updateDoc(snapshot, { balance })

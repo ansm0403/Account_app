@@ -19,10 +19,6 @@ export default function MyCard({
     const { data } = useMyCards();
     const myCards = data ? [checkCard, ...data] : [checkCard];
 
-    console.log("데이터 : ", data);
-
-    console.log("cards : ", myCards);
-
     if(!myCards) return null;
 
     return (

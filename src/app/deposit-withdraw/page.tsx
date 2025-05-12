@@ -7,25 +7,18 @@ import withAuth from '@/hook/withAuth'
 import useAccount from '@/hook/useAccount'
 import LoadingPortal from '@/components/shared/ModalPortal'
 import Modal from '@/components/shared/Modal'
-import Loading from '@/components/shared/Loading'
 import { useRouter } from 'next/navigation'
+import Loading from '@/components/shared/Loading'
 
-function TransferPage() {
+function DepositWithdrawPage() {
 
   const { data : accounts } = useAccount();
   const router = useRouter();
   const [ loading, setLoading ] = useState(false);
 
-//   const [ open, setOpen ] = useState<boolean>();
-
-//   useEffect(()=>{
-//     const isOpen = !myAccount ? true : false;
-//     setOpen(isOpen);
-// },[accounts, myAccount])
-
   return (
     <Container>
-          {
+         {
             !accounts ? (
                 <LoadingPortal>
                     <Modal 
@@ -38,7 +31,7 @@ function TransferPage() {
                      />
                 </LoadingPortal>
             ) : (
-              <TransactionForm type="transfer" accounts={accounts}/>
+              <TransactionForm type = "deposit-withdraw" accounts={accounts}/>
             )
           }
           {
@@ -52,4 +45,4 @@ const Container = styled.div`
     display : flex;
     justify-content : center;
 `
-export default withAuth(TransferPage);
+export default withAuth(DepositWithdrawPage);

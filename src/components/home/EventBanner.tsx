@@ -42,7 +42,6 @@ function EventBanner() {
                   <Text typography='t6'>{banner.subTitle}</Text>
                 </Flex>
                 <Image src = {banner.iconUrl} width={40} height={40} alt = "eventbanner-img" />
-                
               </Flex>  
             </Link>
           </SwiperSlide>
